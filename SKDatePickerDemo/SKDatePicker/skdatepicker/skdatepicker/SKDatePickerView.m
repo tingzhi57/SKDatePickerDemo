@@ -52,7 +52,7 @@
     
     [NSLayoutConstraint addEqualToConstraints:containerView superView:self attributes:@[@(NSLayoutAttributeCenterX),@(NSLayoutAttributeTop)]];
     
-    [NSLayoutConstraint addLessOrEqualToConstraints:containerView superView:self attributes:@[@(NSLayoutAttributeWidth),@(NSLayoutAttributeHeight)]];
+    [NSLayoutConstraint addLessOrEqualToConstraints:containerView superView:self attributes:@[@(NSLayoutAttributeWidth),@(NSLayoutAttributeHeight),@(NSLayoutAttributeBottom)]];
     
     NSMutableArray<NSLayoutConstraint *>* active_constrains = [NSMutableArray array];
     NSLayoutConstraint * l_constrain = [containerView.leftAnchor constraintEqualToAnchor:self.leftAnchor];
@@ -347,6 +347,7 @@
     {
         return [self.delegate colorForUnavaibleDay];
     }
+    
     return [UIColor lightGrayColor];
 }
 @end

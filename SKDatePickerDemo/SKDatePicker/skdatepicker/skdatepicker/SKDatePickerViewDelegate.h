@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, SelectionShape)
 @protocol SKDatePickerViewDelegate <NSObject>
 @required
 /**
- Is called when the user selected a day
+ It's called when the user selected a day
  - parameter date: the date of the user selected
  - note:
  Implementing this method is mandatory
@@ -34,7 +34,28 @@ typedef NS_ENUM(NSInteger, SelectionShape)
 
 
 @optional
+/**
+ Determines if user can select a period
+ - note:
+ Implementing this method is optional. Default set to false.
+ */
+-(BOOL)shouldContinueSelection;
+
+/**
+ It's called when the user selected a period
+ - parameter
+    startDate: the start date of the user selected
+    endDate: the end date of the user selected
+ - note:
+ Implementing this method is optional
+ */
 -(void)didSelectContinueDayFrom:(NSDate*)startDate toEnd:(NSDate*)endDate;
+
+/**
+ Warning when the selected period exceeds than 45 days.
+ - note:
+ Implementing this method is optional.
+ */
 -(void)warningSelectTooLargeScope:(NSInteger)maxPeriodDays;
 /**
  Sets the first day of the week.
@@ -43,7 +64,7 @@ typedef NS_ENUM(NSInteger, SelectionShape)
  */
 -(NSInteger)firstWeekDay;
 /**
- Is called when the user swiped (or manually moved) to another month
+ It's called when the user swiped (or manually moved) to another month
  - parameter monthView: the monthView that is now 'on screen'
  - note:
  Implementing this method is optional.
@@ -51,7 +72,7 @@ typedef NS_ENUM(NSInteger, SelectionShape)
 -(void)didPresentOtherMonth:(SKDatePickerMonthView*)monthView;
 
 /**
- Is called to check if any particular date is selectable by the picker
+ It's called to check if any particular date is selectable by the picker
  - parameter date: the date to check if allowed
  - note:
  Implementing this method is optional.
@@ -73,11 +94,9 @@ typedef NS_ENUM(NSInteger, SelectionShape)
  localization of your app, return true here. If you return true and your app is not localized, the weekday symbols and
  the month description will be in the development language.
  */
-//-(BOOL)shouldLocalize;
 -(NSLocale*)preferredLocal;
 -(NSString*)monthFormatString;
 
--(BOOL)shouldContinueSelection;
 
 /**
  Determines if hide month label or next|previous moth button
@@ -140,7 +159,7 @@ Implementing this variable is optional. It's default is set to false.
 -(CGFloat)rowViewHeightRatio;
 
 /**
- Is called when setting up the calendar view as an override point for customization of weekday labels
+ It's called when setting up the calendar view as an override point for customization of weekday labels
  - parameter calendar: calendar instance used by the calendar view
  */
 -(NSArray<NSString*>*)weekdaySymbols:(NSCalendar*)calendar;

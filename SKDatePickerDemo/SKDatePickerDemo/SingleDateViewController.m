@@ -33,7 +33,7 @@
     }
     else
     {
-        // Fallback on earlier versions
+        [[self.datePickerView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:44] setActive:YES];
     }
     
     self.datePickerView.delegate = self;
