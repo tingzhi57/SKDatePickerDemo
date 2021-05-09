@@ -1,0 +1,543 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4ECD2187263FFEBD000D19E3 /* skdatepicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECD217D263FFEBD000D19E3 /* skdatepicker.framework */; };
+		4ECD218C263FFEBD000D19E3 /* skdatepickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD218B263FFEBD000D19E3 /* skdatepickerTests.m */; };
+		4ECD218E263FFEBD000D19E3 /* skdatepicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD2180263FFEBD000D19E3 /* skdatepicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECD21A3263FFF4C000D19E3 /* SKDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21A1263FFF4C000D19E3 /* SKDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECD21A4263FFF4C000D19E3 /* SKDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD21A2263FFF4C000D19E3 /* SKDate.m */; };
+		4ECD21A7263FFF96000D19E3 /* SKDatePickerDayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21A5263FFF96000D19E3 /* SKDatePickerDayView.h */; };
+		4ECD21A8263FFF96000D19E3 /* SKDatePickerDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD21A6263FFF96000D19E3 /* SKDatePickerDayView.m */; };
+		4ECD21AB263FFFC5000D19E3 /* SKDatePickerWeekView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21A9263FFFC5000D19E3 /* SKDatePickerWeekView.h */; };
+		4ECD21AC263FFFC5000D19E3 /* SKDatePickerWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD21AA263FFFC5000D19E3 /* SKDatePickerWeekView.m */; };
+		4ECD21AF263FFFDD000D19E3 /* SKDatePickerMonthView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21AD263FFFDD000D19E3 /* SKDatePickerMonthView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECD21B0263FFFDD000D19E3 /* SKDatePickerMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD21AE263FFFDD000D19E3 /* SKDatePickerMonthView.m */; };
+		4ECD21B32640058A000D19E3 /* SKDatePickerSelectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21B12640058A000D19E3 /* SKDatePickerSelectionView.h */; };
+		4ECD21B42640058A000D19E3 /* SKDatePickerSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD21B22640058A000D19E3 /* SKDatePickerSelectionView.m */; };
+		4ECD21B72640065C000D19E3 /* SKDatePickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21B52640065C000D19E3 /* SKDatePickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECD21B82640065C000D19E3 /* SKDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD21B62640065C000D19E3 /* SKDatePickerView.m */; };
+		4ECD21CB2640193F000D19E3 /* NSLayoutConstraint+SKConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD21C92640193F000D19E3 /* NSLayoutConstraint+SKConstraint.m */; };
+		4ECD21CD26401A79000D19E3 /* NSLayoutConstraint+SKConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21CC26401990000D19E3 /* NSLayoutConstraint+SKConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECD21CF264039D0000D19E3 /* SKDatePickerViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21CE264039D0000D19E3 /* SKDatePickerViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECD21D22640443A000D19E3 /* NSDate+SKDateCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21D02640443A000D19E3 /* NSDate+SKDateCategory.h */; };
+		4ECD21D32640443A000D19E3 /* NSDate+SKDateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD21D12640443A000D19E3 /* NSDate+SKDateCategory.m */; };
+		4ECD21DC264108B7000D19E3 /* SKDatePickerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD21DA264108B7000D19E3 /* SKDatePickerManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECD21DD264108B7000D19E3 /* SKDatePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD21DB264108B7000D19E3 /* SKDatePickerManager.m */; };
+		4ECD222B26414D95000D19E3 /* SKDatePickerWeekLabelsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD222926414D95000D19E3 /* SKDatePickerWeekLabelsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECD222C26414D95000D19E3 /* SKDatePickerWeekLabelsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD222A26414D95000D19E3 /* SKDatePickerWeekLabelsView.m */; };
+		4ECD222F26416C04000D19E3 /* SKDatePickerContentControll.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD222D26416C04000D19E3 /* SKDatePickerContentControll.h */; };
+		4ECD223026416C04000D19E3 /* SKDatePickerContentControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD222E26416C04000D19E3 /* SKDatePickerContentControll.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4ECD2188263FFEBD000D19E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ECD2174263FFEBC000D19E3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4ECD217C263FFEBD000D19E3;
+			remoteInfo = skdatepicker;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4ECD217D263FFEBD000D19E3 /* skdatepicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = skdatepicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECD2180263FFEBD000D19E3 /* skdatepicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skdatepicker.h; sourceTree = "<group>"; };
+		4ECD2181263FFEBD000D19E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4ECD2186263FFEBD000D19E3 /* skdatepickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = skdatepickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECD218B263FFEBD000D19E3 /* skdatepickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = skdatepickerTests.m; sourceTree = "<group>"; };
+		4ECD218D263FFEBD000D19E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4ECD21A1263FFF4C000D19E3 /* SKDate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDate.h; sourceTree = "<group>"; };
+		4ECD21A2263FFF4C000D19E3 /* SKDate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDate.m; sourceTree = "<group>"; };
+		4ECD21A5263FFF96000D19E3 /* SKDatePickerDayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDatePickerDayView.h; sourceTree = "<group>"; };
+		4ECD21A6263FFF96000D19E3 /* SKDatePickerDayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerDayView.m; sourceTree = "<group>"; };
+		4ECD21A9263FFFC5000D19E3 /* SKDatePickerWeekView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDatePickerWeekView.h; sourceTree = "<group>"; };
+		4ECD21AA263FFFC5000D19E3 /* SKDatePickerWeekView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerWeekView.m; sourceTree = "<group>"; };
+		4ECD21AD263FFFDD000D19E3 /* SKDatePickerMonthView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDatePickerMonthView.h; sourceTree = "<group>"; };
+		4ECD21AE263FFFDD000D19E3 /* SKDatePickerMonthView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerMonthView.m; sourceTree = "<group>"; };
+		4ECD21B12640058A000D19E3 /* SKDatePickerSelectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDatePickerSelectionView.h; sourceTree = "<group>"; };
+		4ECD21B22640058A000D19E3 /* SKDatePickerSelectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerSelectionView.m; sourceTree = "<group>"; };
+		4ECD21B52640065C000D19E3 /* SKDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDatePickerView.h; sourceTree = "<group>"; };
+		4ECD21B62640065C000D19E3 /* SKDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerView.m; sourceTree = "<group>"; };
+		4ECD21C92640193F000D19E3 /* NSLayoutConstraint+SKConstraint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+SKConstraint.m"; sourceTree = "<group>"; };
+		4ECD21CC26401990000D19E3 /* NSLayoutConstraint+SKConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+SKConstraint.h"; sourceTree = "<group>"; };
+		4ECD21CE264039D0000D19E3 /* SKDatePickerViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDatePickerViewDelegate.h; sourceTree = "<group>"; };
+		4ECD21D02640443A000D19E3 /* NSDate+SKDateCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+SKDateCategory.h"; sourceTree = "<group>"; };
+		4ECD21D12640443A000D19E3 /* NSDate+SKDateCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SKDateCategory.m"; sourceTree = "<group>"; };
+		4ECD21DA264108B7000D19E3 /* SKDatePickerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDatePickerManager.h; sourceTree = "<group>"; };
+		4ECD21DB264108B7000D19E3 /* SKDatePickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerManager.m; sourceTree = "<group>"; };
+		4ECD222926414D95000D19E3 /* SKDatePickerWeekLabelsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDatePickerWeekLabelsView.h; sourceTree = "<group>"; };
+		4ECD222A26414D95000D19E3 /* SKDatePickerWeekLabelsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerWeekLabelsView.m; sourceTree = "<group>"; };
+		4ECD222D26416C04000D19E3 /* SKDatePickerContentControll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKDatePickerContentControll.h; sourceTree = "<group>"; };
+		4ECD222E26416C04000D19E3 /* SKDatePickerContentControll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerContentControll.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4ECD217A263FFEBD000D19E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4ECD2183263FFEBD000D19E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4ECD2187263FFEBD000D19E3 /* skdatepicker.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4ECD2173263FFEBC000D19E3 = {
+			isa = PBXGroup;
+			children = (
+				4ECD217F263FFEBD000D19E3 /* skdatepicker */,
+				4ECD218A263FFEBD000D19E3 /* skdatepickerTests */,
+				4ECD217E263FFEBD000D19E3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4ECD217E263FFEBD000D19E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4ECD217D263FFEBD000D19E3 /* skdatepicker.framework */,
+				4ECD2186263FFEBD000D19E3 /* skdatepickerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4ECD217F263FFEBD000D19E3 /* skdatepicker */ = {
+			isa = PBXGroup;
+			children = (
+				4ECD2180263FFEBD000D19E3 /* skdatepicker.h */,
+				4ECD2181263FFEBD000D19E3 /* Info.plist */,
+				4ECD21A1263FFF4C000D19E3 /* SKDate.h */,
+				4ECD21A2263FFF4C000D19E3 /* SKDate.m */,
+				4ECD21A5263FFF96000D19E3 /* SKDatePickerDayView.h */,
+				4ECD21A6263FFF96000D19E3 /* SKDatePickerDayView.m */,
+				4ECD21A9263FFFC5000D19E3 /* SKDatePickerWeekView.h */,
+				4ECD21AA263FFFC5000D19E3 /* SKDatePickerWeekView.m */,
+				4ECD21AD263FFFDD000D19E3 /* SKDatePickerMonthView.h */,
+				4ECD21AE263FFFDD000D19E3 /* SKDatePickerMonthView.m */,
+				4ECD21B12640058A000D19E3 /* SKDatePickerSelectionView.h */,
+				4ECD21B22640058A000D19E3 /* SKDatePickerSelectionView.m */,
+				4ECD21B52640065C000D19E3 /* SKDatePickerView.h */,
+				4ECD21B62640065C000D19E3 /* SKDatePickerView.m */,
+				4ECD21CC26401990000D19E3 /* NSLayoutConstraint+SKConstraint.h */,
+				4ECD21C92640193F000D19E3 /* NSLayoutConstraint+SKConstraint.m */,
+				4ECD21CE264039D0000D19E3 /* SKDatePickerViewDelegate.h */,
+				4ECD21D02640443A000D19E3 /* NSDate+SKDateCategory.h */,
+				4ECD21D12640443A000D19E3 /* NSDate+SKDateCategory.m */,
+				4ECD21DA264108B7000D19E3 /* SKDatePickerManager.h */,
+				4ECD21DB264108B7000D19E3 /* SKDatePickerManager.m */,
+				4ECD222926414D95000D19E3 /* SKDatePickerWeekLabelsView.h */,
+				4ECD222A26414D95000D19E3 /* SKDatePickerWeekLabelsView.m */,
+				4ECD222D26416C04000D19E3 /* SKDatePickerContentControll.h */,
+				4ECD222E26416C04000D19E3 /* SKDatePickerContentControll.m */,
+			);
+			path = skdatepicker;
+			sourceTree = "<group>";
+		};
+		4ECD218A263FFEBD000D19E3 /* skdatepickerTests */ = {
+			isa = PBXGroup;
+			children = (
+				4ECD218B263FFEBD000D19E3 /* skdatepickerTests.m */,
+				4ECD218D263FFEBD000D19E3 /* Info.plist */,
+			);
+			path = skdatepickerTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4ECD2178263FFEBD000D19E3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4ECD21A3263FFF4C000D19E3 /* SKDate.h in Headers */,
+				4ECD21DC264108B7000D19E3 /* SKDatePickerManager.h in Headers */,
+				4ECD222B26414D95000D19E3 /* SKDatePickerWeekLabelsView.h in Headers */,
+				4ECD21AB263FFFC5000D19E3 /* SKDatePickerWeekView.h in Headers */,
+				4ECD222F26416C04000D19E3 /* SKDatePickerContentControll.h in Headers */,
+				4ECD21CF264039D0000D19E3 /* SKDatePickerViewDelegate.h in Headers */,
+				4ECD21B72640065C000D19E3 /* SKDatePickerView.h in Headers */,
+				4ECD21AF263FFFDD000D19E3 /* SKDatePickerMonthView.h in Headers */,
+				4ECD21CD26401A79000D19E3 /* NSLayoutConstraint+SKConstraint.h in Headers */,
+				4ECD21A7263FFF96000D19E3 /* SKDatePickerDayView.h in Headers */,
+				4ECD21B32640058A000D19E3 /* SKDatePickerSelectionView.h in Headers */,
+				4ECD218E263FFEBD000D19E3 /* skdatepicker.h in Headers */,
+				4ECD21D22640443A000D19E3 /* NSDate+SKDateCategory.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4ECD217C263FFEBD000D19E3 /* skdatepicker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4ECD2191263FFEBD000D19E3 /* Build configuration list for PBXNativeTarget "skdatepicker" */;
+			buildPhases = (
+				4ECD2178263FFEBD000D19E3 /* Headers */,
+				4ECD2179263FFEBD000D19E3 /* Sources */,
+				4ECD217A263FFEBD000D19E3 /* Frameworks */,
+				4ECD217B263FFEBD000D19E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = skdatepicker;
+			productName = skdatepicker;
+			productReference = 4ECD217D263FFEBD000D19E3 /* skdatepicker.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4ECD2185263FFEBD000D19E3 /* skdatepickerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4ECD2194263FFEBD000D19E3 /* Build configuration list for PBXNativeTarget "skdatepickerTests" */;
+			buildPhases = (
+				4ECD2182263FFEBD000D19E3 /* Sources */,
+				4ECD2183263FFEBD000D19E3 /* Frameworks */,
+				4ECD2184263FFEBD000D19E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4ECD2189263FFEBD000D19E3 /* PBXTargetDependency */,
+			);
+			name = skdatepickerTests;
+			productName = skdatepickerTests;
+			productReference = 4ECD2186263FFEBD000D19E3 /* skdatepickerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4ECD2174263FFEBC000D19E3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					4ECD217C263FFEBD000D19E3 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					4ECD2185263FFEBD000D19E3 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = 4ECD2177263FFEBC000D19E3 /* Build configuration list for PBXProject "skdatepicker" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4ECD2173263FFEBC000D19E3;
+			productRefGroup = 4ECD217E263FFEBD000D19E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4ECD217C263FFEBD000D19E3 /* skdatepicker */,
+				4ECD2185263FFEBD000D19E3 /* skdatepickerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4ECD217B263FFEBD000D19E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4ECD2184263FFEBD000D19E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4ECD2179263FFEBD000D19E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4ECD21A4263FFF4C000D19E3 /* SKDate.m in Sources */,
+				4ECD21B0263FFFDD000D19E3 /* SKDatePickerMonthView.m in Sources */,
+				4ECD21B42640058A000D19E3 /* SKDatePickerSelectionView.m in Sources */,
+				4ECD223026416C04000D19E3 /* SKDatePickerContentControll.m in Sources */,
+				4ECD21AC263FFFC5000D19E3 /* SKDatePickerWeekView.m in Sources */,
+				4ECD21DD264108B7000D19E3 /* SKDatePickerManager.m in Sources */,
+				4ECD222C26414D95000D19E3 /* SKDatePickerWeekLabelsView.m in Sources */,
+				4ECD21CB2640193F000D19E3 /* NSLayoutConstraint+SKConstraint.m in Sources */,
+				4ECD21B82640065C000D19E3 /* SKDatePickerView.m in Sources */,
+				4ECD21D32640443A000D19E3 /* NSDate+SKDateCategory.m in Sources */,
+				4ECD21A8263FFF96000D19E3 /* SKDatePickerDayView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4ECD2182263FFEBD000D19E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4ECD218C263FFEBD000D19E3 /* skdatepickerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4ECD2189263FFEBD000D19E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4ECD217C263FFEBD000D19E3 /* skdatepicker */;
+			targetProxy = 4ECD2188263FFEBD000D19E3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4ECD218F263FFEBD000D19E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4ECD2190263FFEBD000D19E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4ECD2192263FFEBD000D19E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 665SG9EMM2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = skdatepicker/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenksoft.www.skdatepicker;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4ECD2193263FFEBD000D19E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 665SG9EMM2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = skdatepicker/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenksoft.www.skdatepicker;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4ECD2195263FFEBD000D19E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 665SG9EMM2;
+				INFOPLIST_FILE = skdatepickerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenksoft.www.skdatepickerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4ECD2196263FFEBD000D19E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 665SG9EMM2;
+				INFOPLIST_FILE = skdatepickerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenksoft.www.skdatepickerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4ECD2177263FFEBC000D19E3 /* Build configuration list for PBXProject "skdatepicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4ECD218F263FFEBD000D19E3 /* Debug */,
+				4ECD2190263FFEBD000D19E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4ECD2191263FFEBD000D19E3 /* Build configuration list for PBXNativeTarget "skdatepicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4ECD2192263FFEBD000D19E3 /* Debug */,
+				4ECD2193263FFEBD000D19E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4ECD2194263FFEBD000D19E3 /* Build configuration list for PBXNativeTarget "skdatepickerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4ECD2195263FFEBD000D19E3 /* Debug */,
+				4ECD2196263FFEBD000D19E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4ECD2174263FFEBC000D19E3 /* Project object */;
+}
