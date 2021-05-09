@@ -22,7 +22,6 @@
 @property (nonatomic, weak) SKDatePickerSelectionView* selectionView;
 
 @property (nonatomic, assign) UITapGestureRecognizer* tapGesture;
-@property (nonatomic, assign) UILongPressGestureRecognizer* longPressGesture;
 @property (nonatomic, retain) UILabel* textLabel;
 @end
 
@@ -51,7 +50,8 @@
             {
                 self.datePickerView.selectedDateView = self;
             }
-        }else if([self shouldSelectedInPeriod:self.datePickerView.periodStartDate to:self.datePickerView.periodEndDate])
+        }
+        else if([self shouldSelectedInPeriod:self.datePickerView.periodStartDate to:self.datePickerView.periodEndDate])
         {
             [self select];
             [self.monthView addSelectDayView:self];
@@ -62,12 +62,6 @@
         
         self.tapGesture = tapGesture;
         [self addGestureRecognizer:tapGesture];
-        
-
-        //add longPress gesture recognizer
-        UILongPressGestureRecognizer* longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(dayViewPressed:)];
-        self.longPressGesture = longPressGesture;
-        [self addGestureRecognizer:longPressGesture];
     }
     return self;
 }
@@ -77,10 +71,6 @@
     if (self.tapGesture)
     {
         [self removeGestureRecognizer:self.tapGesture];
-    }
-    if (self.longPressGesture)
-    {
-        [self removeGestureRecognizer:self.longPressGesture];
     }
 }
 
@@ -109,57 +99,50 @@
 -(void)setupLabelFont
 {
     //get preferred font
-    UIFont* preferredFont = nil;
     if ([self.datePickerView.delegate respondsToSelector:@selector(fontForDayLabel)])
     {
-        preferredFont = [self.datePickerView.delegate fontForDayLabel];
+        self.textLabel.font = [self.datePickerView.delegate fontForDayLabel];
     }
-    else
-    {
-        //get preferred size
-        CGFloat sizeOfFont = 11;
-        
-        preferredFont = [UIFont systemFontOfSize:sizeOfFont];
-    }
-    
-    self.textLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",self.dayInfo.day] attributes:@{NSFontAttributeName:preferredFont}];
+    self.textLabel.text = [NSString stringWithFormat:@"%ld",self.dayInfo.day];
 }
 
 -(void)refreshLabelColor
 {
     if (self.dayInfo.isInMonth)
     {
-        if ([self.datePickerView.delegate respondsToSelector:@selector(colorForDayLabelInMonth)])
+        if (![self.datePickerView dateIsSelectable:self.date])
         {
-            self.textLabel.textColor = [self.datePickerView.delegate colorForDayLabelInMonth];
+            self.textLabel.textColor = [self.datePickerView colorForUnavaibleDay];
         }
-        
-        if ([self.datePickerView.delegate respondsToSelector:@selector(colorForUnavaibleDay)]
-            && ![self.datePickerView dateIsSelectable:self.date])
+        else
         {
-            self.textLabel.textColor = [self.datePickerView.delegate colorForUnavaibleDay];
+            self.textLabel.textColor = [self.datePickerView colorForDayLabelInMonth];
         }
     }
     else
     {
+        self.userInteractionEnabled = false;
         if ([self.datePickerView.delegate respondsToSelector:@selector(shouldShowMonthOutDates)] && [self.datePickerView.delegate shouldShowMonthOutDates])
         {
             if ([self.datePickerView.delegate respondsToSelector:@selector(colorForDayLabelOutOfMonth)])
             {
                 self.textLabel.textColor = [self.datePickerView.delegate colorForDayLabelOutOfMonth];
             }
+            else
+                self.textLabel.textColor = [self.datePickerView colorForUnavaibleDay];
         }
         else
         {
-            self.userInteractionEnabled = false;
             [self.textLabel setHidden:true];
         }
     }
     
-    if ([self isToday] && [self.datePickerView.delegate respondsToSelector:@selector(colorForCurrentDay)])
+    if ([self isToday] && [self.datePickerView.delegate respondsToSelector:@selector(colorForToday)])
     {
-        self.textLabel.textColor = [self.datePickerView.delegate colorForCurrentDay];
+        self.textLabel.textColor = [self.datePickerView.delegate colorForToday];
     }
+    else
+        self.textLabel.textColor = nil;
 }
 
 -(BOOL)isToday
@@ -214,9 +197,9 @@
     self.selectionView = selView;
     
     //set textcolor to selected state
-    if ([self.datePickerView.delegate respondsToSelector:@selector(colorForSelelectedDayLabel)])
+    if ([self.datePickerView.delegate respondsToSelector:@selector(colorForSelectedDayText)])
     {
-        self.textLabel.textColor = [self.datePickerView.delegate colorForSelelectedDayLabel];
+        self.textLabel.textColor = [self.datePickerView.delegate colorForSelectedDayText];
     }
 }
 
@@ -227,53 +210,22 @@
         return NO;
     }
     
+    if (![self.datePickerView shouldShowMonthOutDates] && !self.dayInfo.isInMonth)
+    {
+        return NO;
+    }
+    
     if (end == nil)
     {
         return [start isEqualToDate:self.date];
     }
     return [self.date laterDate:start] == self.date && [self.date earlierDate:end] == self.date;
 }
+
 #pragma mark- Touch handling
 
 -(void)dayViewTapped
 {
     [self.datePickerView didTapDayView:self];
 }
-
--(void)dayViewPressed:(UILongPressGestureRecognizer*)gesture
-{
-#if 0
-    //if selectedDateView exists and is self, return. Long pressing shouldn't do anything on selected day.
-    if let selectedDate = datePickerView.selectedDateView {
-        guard selectedDate != self else { return }
-    }
-    
-    let location = gesture.location(in: self)
-    
-    switch gesture.state {
-    case .began:
-        semiSelect(animated: true)
-    case .ended:
-        if let selView = selectionView {
-            selView.removeFromSuperview()
-        }
-        datePickerView.didTapDayView(dayView: self)
-    
-    case .changed:
-        
-        if !(longPressAreaMin...longPressAreaMaxX).contains(location.x) || !(longPressAreaMin...longPressAreaMaxY).contains(location.y) {
-
-            semiDeselect(animated: true)
-            
-            //this will cancel the longpress gesture (and enable it again for the next time)
-            gesture.isEnabled = false
-            gesture.isEnabled = true
-        }
-
-    default:
-        break
-    }
-#endif
-}
-
 @end

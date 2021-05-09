@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E31116A26479EA5001C448E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E31116C26479EA5001C448E /* Localizable.strings */; };
 		4ECD224226442879000D19E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD224126442879000D19E3 /* AppDelegate.m */; };
 		4ECD224526442879000D19E3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD224426442879000D19E3 /* SceneDelegate.m */; };
 		4ECD224826442879000D19E3 /* SingleDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD224726442879000D19E3 /* SingleDateViewController.m */; };
@@ -53,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E31116B26479EA5001C448E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E31116D26479EAA001C448E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4E5DB3882646F82000CF610E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		4E5DB38B2646F82000CF610E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		4E5DB38D2646FA2A00CF610E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 				4ECD224C26442879000D19E3 /* SKDatePickerDemo.xcdatamodeld */,
 				4ECD228726442C6F000D19E3 /* PeriodViewController.h */,
 				4ECD228826442C6F000D19E3 /* PeriodViewController.m */,
+				4E31116C26479EA5001C448E /* Localizable.strings */,
 			);
 			path = SKDatePickerDemo;
 			sourceTree = "<group>";
@@ -312,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ECD225326442881000D19E3 /* LaunchScreen.storyboard in Resources */,
+				4E31116A26479EA5001C448E /* Localizable.strings in Resources */,
 				4ECD225026442881000D19E3 /* Assets.xcassets in Resources */,
 				4ECD224B26442879000D19E3 /* Main.storyboard in Resources */,
 			);
@@ -379,6 +384,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4E31116C26479EA5001C448E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4E31116B26479EA5001C448E /* en */,
+				4E31116D26479EAA001C448E /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		4ECD224926442879000D19E3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -453,7 +467,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -507,7 +521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -524,7 +538,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 665SG9EMM2;
 				INFOPLIST_FILE = SKDatePickerDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -545,7 +559,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 665SG9EMM2;
 				INFOPLIST_FILE = SKDatePickerDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

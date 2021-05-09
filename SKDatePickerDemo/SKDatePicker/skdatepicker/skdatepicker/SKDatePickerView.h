@@ -36,6 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSDate*)periodEndDate;
 
 -(BOOL)shouldShowTopToolBar;
+
+-(UIColor*)colorForDayLabelInMonth;
+-(UIColor*)colorForUnavaibleDay;
 @end
 
 NS_ASSUME_NONNULL_END

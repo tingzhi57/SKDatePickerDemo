@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  SKDatePickerDemo
+
+  Created by xiw on 2021/5/9.
+  
+*/
+"Selected Date" = "Selected Date";
+"OK" = "OK";
+"Couldn't exceed %d days" = "Couldn't exceed %d days";

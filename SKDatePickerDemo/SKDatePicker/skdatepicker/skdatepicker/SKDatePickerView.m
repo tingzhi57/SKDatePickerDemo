@@ -115,9 +115,9 @@
         [self.weekdaysView setNeedsDisplay];
     }
     
-    NSLayoutConstraint * hw_constrain = [self.contentController.scrollView.widthAnchor constraintEqualToAnchor:self.contentController.scrollView.heightAnchor multiplier:1.4f];
-    hw_constrain.priority = UILayoutPriorityDefaultHigh;
-    [active_constrains addObject:hw_constrain];
+//    NSLayoutConstraint * hw_constrain = [self.contentController.scrollView.widthAnchor constraintEqualToAnchor:self.contentController.scrollView.heightAnchor multiplier:1.4f];
+//    hw_constrain.priority = UILayoutPriorityDefaultHigh;
+//    [active_constrains addObject:hw_constrain];
     
 //    [[self.contentController.scrollView.heightAnchor constraintLessThanOrEqualToAnchor:self.weekdaysView.heightAnchor multiplier:6.0f] setActive:YES];
     
@@ -283,7 +283,7 @@
     // Setup previousMonthButton
     self.previousMonthButton = [UIButton new];
     [self.previousMonthButton setTitle:@" < " forState:UIControlStateNormal];
-    [self.previousMonthButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    
     
     [self.previousMonthButton addTarget:self action:@selector(loadPreviousView) forControlEvents:UIControlEventTouchUpInside];
     [self.topToolBar addSubview:self.previousMonthButton];
@@ -295,18 +295,30 @@
     // Setup nextMonthButton
     self.nextMonthButton = [UIButton new];
     [self.nextMonthButton setTitle:@" > " forState:UIControlStateNormal];
-    [self.nextMonthButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    
     [self.nextMonthButton addTarget:self action:@selector(loadNextView) forControlEvents:UIControlEventTouchUpInside];
     [self.topToolBar addSubview:self.nextMonthButton];
 
     [NSLayoutConstraint addEqualToConstraints:self.nextMonthButton superView:self.topToolBar attributes:@[@(NSLayoutAttributeBottom),@(NSLayoutAttributeRight),@(NSLayoutAttributeTop)]];
 
     [otherActiveConstraints addObject:[self.nextMonthButton.widthAnchor constraintEqualToAnchor:self.nextMonthButton.heightAnchor]];
-    
+    if ([self.delegate respondsToSelector:@selector(colorForTopbarBackground)])
+    {
+        self.topToolBar.backgroundColor = [self.delegate colorForTopbarBackground];
+    }
 
     // Setup dateLabel
     self.dateLabel = [UILabel new];
     self.dateLabel.textAlignment = NSTextAlignmentCenter;
+    if ([self.delegate respondsToSelector:@selector(fontForTopbarText)])
+    {
+        self.dateLabel.font = [self.delegate fontForTopbarText];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(colorForTopbarText)])
+    {
+        self.dateLabel.textColor = [self.delegate colorForTopbarText];
+    }
     [self.topToolBar addSubview:self.dateLabel];
     
     [NSLayoutConstraint addEqualToConstraints:self.dateLabel superView:self.topToolBar attributes:@[@(NSLayoutAttributeBottom),@(NSLayoutAttributeTop)]];
@@ -314,5 +326,27 @@
     [otherActiveConstraints addObject:[self.dateLabel.leftAnchor constraintEqualToAnchor:self.previousMonthButton.rightAnchor]];
 
     [otherActiveConstraints addObject:[self.dateLabel.rightAnchor constraintEqualToAnchor:self.nextMonthButton.leftAnchor]];
+    
+    [self.previousMonthButton setTitleColor:self.dateLabel.textColor forState:UIControlStateNormal];
+    [self.nextMonthButton setTitleColor:self.dateLabel.textColor forState:UIControlStateNormal];
+}
+
+#pragma mark - Colors
+-(UIColor*)colorForDayLabelInMonth
+{
+    if ([self.delegate respondsToSelector:@selector(colorForDayLabelInMonth)])
+    {
+        return [self.delegate colorForDayLabelInMonth];
+    }
+    return nil;
+}
+
+-(UIColor*)colorForUnavaibleDay
+{
+    if ([self.delegate respondsToSelector:@selector(colorForUnavaibleDay)])
+    {
+        return [self.delegate colorForUnavaibleDay];
+    }
+    return [UIColor lightGrayColor];
 }
 @end

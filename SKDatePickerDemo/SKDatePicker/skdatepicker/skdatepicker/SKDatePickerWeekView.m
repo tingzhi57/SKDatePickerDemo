@@ -16,7 +16,7 @@
 @property (nonatomic,weak) SKDatePickerView* datePickerView;
 @property (nonatomic,weak) SKDatePickerMonthView* monthView;
 @property (nonatomic,assign) NSUInteger index;
-@property (nonatomic,retain) NSMutableArray<SKDatePickerDayView*>* dayViews;
+@property (nonatomic,strong) NSArray<SKDatePickerDayView*>* dayViews;
 
 @end
 
@@ -33,16 +33,12 @@
     return self;
 }
 
--(void)dealloc
-{
-    [self.dayViews removeAllObjects];
-    self.dayViews = nil;
-}
 #pragma mark - Create dayView
 ///fills the weekView stack with dayviews
 -(void)createDayViews
 {
-    self.dayViews = [NSMutableArray arrayWithCapacity:7];
+    NSMutableArray<SKDatePickerDayView*>* tmpArray = [NSMutableArray array];
+    
     for (int i = 0; i < 7; i++)
     {
         //guard statement to prevent index getting out or range (some months need only 5 (index 4) weeks, index goes up to 5)
@@ -53,28 +49,27 @@
             
             SKDatePickerDayView* dayView = [[SKDatePickerDayView alloc] initWithPickerView:self.datePickerView monthView:self.monthView weekView:self index:i dayInfo:dayInfo];
             
-            [self.dayViews addObject:dayView];
+            [tmpArray addObject:dayView];
             [self addArrangedSubview:dayView];
         }
         else break;
         
     }
+    
+    self.dayViews = tmpArray;
 }
 
 -(NSArray<SKDatePickerDayView*>*)getDaysFrom:(NSDate*)start to:(nullable NSDate*)end
 {
-    NSMutableArray<SKDatePickerDayView*>* tmpArray = [NSMutableArray array];
-    for (SKDatePickerDayView* dayView in self.dayViews)
-    {
+    __block NSMutableArray<SKDatePickerDayView*>* tmpArray = [NSMutableArray array];
+    [self.dayViews enumerateObjectsUsingBlock:^(SKDatePickerDayView * _Nonnull dayView, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([dayView shouldSelectedInPeriod:start to:end])
         {
             [tmpArray addObject:dayView];
-            if (end == nil)
-            {
-                break;
-            }
+            *stop = (end == nil);
         }
-    }
+    }];
+    
     return tmpArray;
 }
 @end

@@ -95,16 +95,9 @@
     }
     else
     {
-        if ([self.dayView isToday])
+        if ([self.dayView.delegate respondsToSelector:@selector(colorForSelectionBackground)])
         {
-            if ([self.dayView.delegate respondsToSelector:@selector(colorForSelectionCircleForToday)])
-            {
-                return [self.dayView.delegate colorForSelectionCircleForToday];
-            }
-        }
-        else if ([self.dayView.delegate respondsToSelector:@selector(colorForSelectionCircleForOtherDate)])
-        {
-            return [self.dayView.delegate colorForSelectionCircleForOtherDate];
+            return [self.dayView.delegate colorForSelectionBackground];
         }
     }
     return [UIColor lightGrayColor];

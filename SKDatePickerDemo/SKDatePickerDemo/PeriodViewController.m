@@ -6,8 +6,14 @@
 //
 
 #import "PeriodViewController.h"
+#import <skdatepicker/skdatepicker.h>
 
-@interface PeriodViewController ()
+@interface PeriodViewController ()<SKDatePickerViewDelegate>
+@property (weak, nonatomic) IBOutlet SKDatePickerView *datePickerView;
+@property (weak, nonatomic) IBOutlet UILabel *periodLabel;
+@property (weak, nonatomic) IBOutlet UILabel *warningLabel;
+
+@property (nonatomic,strong) NSDateFormatter  * dateFormatter;
 
 @end
 
@@ -16,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.datePickerView.delegate = self;
 }
 
 /*
@@ -28,4 +35,50 @@
 }
 */
 
+
+#pragma mark - SKDatePickerViewDelegate methods
+-(void)didSelectDay:(NSDate*)date
+{
+    
+}
+
+-(BOOL)shouldContinueSelection
+{
+    return YES;
+}
+
+-(void)didSelectContinueDayFrom:(NSDate*)startDate toEnd:(NSDate*)endDate
+{
+    if (self.dateFormatter == nil)
+    {
+        self.dateFormatter = [[NSDateFormatter alloc] init];
+        [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        self.dateFormatter.locale = [NSLocale autoupdatingCurrentLocale];
+    }
+    
+    NSString* startDateString = startDate ? [self.dateFormatter stringFromDate:startDate] : @"";
+    NSString* endDateString = endDate ? [self.dateFormatter stringFromDate:endDate] : @"";
+    self.periodLabel.text = [NSString stringWithFormat:@"%@ ~ %@",startDateString,endDateString];
+    self.warningLabel.text = @"";
+}
+
+-(void)warningSelectTooLargeScope:(NSInteger)maxPeriodDays
+{
+    self.warningLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Couldn't exceed %d days", nil),(int)maxPeriodDays];
+}
+
+//-(BOOL)shouldShowMonthOutDates
+//{
+//    return YES;
+//}
+
+-(SelectionShape)selectionShape
+{
+    return SelectionShapeRoundedRect;
+}
+
+-(UIColor *)colorForSelectedDayText
+{
+    return [UIColor whiteColor];
+}
 @end

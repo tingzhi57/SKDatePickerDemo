@@ -46,11 +46,6 @@
     return self;
 }
 
--(void)dealloc
-{
-    self.weekViews = nil;
-}
-
 -(void)setIsPresented:(BOOL)isPresented
 {
     if (isPresented) {

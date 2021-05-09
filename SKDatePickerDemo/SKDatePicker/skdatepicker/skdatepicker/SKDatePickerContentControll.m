@@ -333,7 +333,11 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
 
 -(void)reSelectPeriodDays
 {
-    NSLog(@"%s,%@ - %@",__FUNCTION__,self.startDate,self.endDate);
+    //NSLog(@"%s,%@ - %@",__FUNCTION__,self.startDate,self.endDate);
+    if ([self.datePickerView.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)])
+    {
+        [self.datePickerView.delegate didSelectContinueDayFrom:self.startDate toEnd:self.endDate];
+    }
     for (SKDatePickerMonthView* monthView in self.monthViews.allValues)
     {
         if (self.startDate == nil && self.endDate == nil)

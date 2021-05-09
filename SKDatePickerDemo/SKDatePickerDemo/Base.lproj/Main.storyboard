@@ -50,10 +50,47 @@
                     <view key="view" contentMode="scaleToFill" id="RKm-N6-AUy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJv-aJ-oCa" customClass="SKDatePickerView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="517.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="NJv-aJ-oCa" secondAttribute="height" multiplier="400:500" id="qtF-1r-Ak2"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOf-Vn-2sg">
+                                <rect key="frame" x="0.0" y="773" width="414" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" systemColor="systemYellowColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZf-UA-bL4">
+                                <rect key="frame" x="0.0" y="731" width="353" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Tmb-30-KGZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Tmb-30-KGZ" firstAttribute="bottom" secondItem="xOf-Vn-2sg" secondAttribute="bottom" constant="40" id="398-Ye-fNY"/>
+                            <constraint firstAttribute="trailing" secondItem="xOf-Vn-2sg" secondAttribute="trailing" id="C7F-Iy-72M"/>
+                            <constraint firstItem="Tmb-30-KGZ" firstAttribute="trailing" secondItem="GZf-UA-bL4" secondAttribute="trailing" constant="61" id="MMH-c1-Rnk"/>
+                            <constraint firstItem="Tmb-30-KGZ" firstAttribute="top" secondItem="NJv-aJ-oCa" secondAttribute="top" id="Tu6-Pe-c4h"/>
+                            <constraint firstItem="NJv-aJ-oCa" firstAttribute="leading" secondItem="RKm-N6-AUy" secondAttribute="leading" id="UqM-EX-Nha"/>
+                            <constraint firstItem="Tmb-30-KGZ" firstAttribute="bottom" secondItem="GZf-UA-bL4" secondAttribute="bottom" constant="82" id="i1Q-lw-mQZ"/>
+                            <constraint firstAttribute="trailing" secondItem="NJv-aJ-oCa" secondAttribute="trailing" id="kLU-gq-eJR"/>
+                            <constraint firstItem="GZf-UA-bL4" firstAttribute="leading" secondItem="Tmb-30-KGZ" secondAttribute="leading" id="pWT-jv-1a2"/>
+                            <constraint firstItem="xOf-Vn-2sg" firstAttribute="leading" secondItem="Tmb-30-KGZ" secondAttribute="leading" id="tOc-X6-L0f"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Period" id="ABT-jx-9pA"/>
+                    <connections>
+                        <outlet property="datePickerView" destination="NJv-aJ-oCa" id="1cu-yf-CdS"/>
+                        <outlet property="periodLabel" destination="GZf-UA-bL4" id="NMC-8d-v63"/>
+                        <outlet property="warningLabel" destination="xOf-Vn-2sg" id="q8k-gH-HBx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mgH-zB-d5b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -63,6 +100,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

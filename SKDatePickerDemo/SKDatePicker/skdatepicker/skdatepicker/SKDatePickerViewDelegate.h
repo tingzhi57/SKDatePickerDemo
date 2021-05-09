@@ -85,6 +85,7 @@ typedef NS_ENUM(NSInteger, SelectionShape)
 Implementing this variable is optional. It's default is set to false.
  */
 -(BOOL)shouldHideTopToolBar;
+
 #pragma mark - General appearance properties
 ///color of any date label text that falls within the presented month
 -(UIColor*)colorForDayLabelInMonth;
@@ -96,38 +97,38 @@ Implementing this variable is optional. It's default is set to false.
 -(UIColor*)colorForUnavaibleDay;
 
 ///color of the 'today' date label text
--(UIColor*)colorForCurrentDay;
+-(UIColor*)colorForToday;
 
 ///color of any label text that is selected
--(UIColor*)colorForSelelectedDayLabel;
+-(UIColor*)colorForSelectedDayText;
 
 ///color of the labels in the WeekdaysView bar that say 'mon' to 'sun'. Defaults to [UIColor darkTextColor].
 -(UIColor*)colorForWeekLabelsText;
-
 -(UIColor*)colorForWeekDaysViewBackground;
+
+-(UIColor*)colorForTopbarText;
+-(UIColor*)colorForTopbarBackground;
+///color of the selection dates
+-(UIColor*)colorForSelectionBackground;
+
+///color of the semi selected selection circle (that shows on a long press)
+-(UIColor*)colorForSemiSelectedSelectionCircle;
+
 /**
- font of the date labels. Defaults to systemfont with a medium size.
+ Determines the shape that is used to indicate a selected date. Possiblilities are:
+ .circle, .square, .roundedRect
  
- - Note: you can use any UIFont name you want, as long as it is available. If it's not available, JBDatePicker will
- use the systemfont instead. If you want to use the systemfont but customize it's size, use an empty string as the
- fontname.
+ - note:
+ Implementing this variable is optional. It's default is set to square.
  
- ## Usage Example: ##
- ````
- //set custom font
- var fontForDayLabel: JBFont {
-    return JBFont(name: "AvenirNext-MediumItalic", size: .medium)
- }
- 
- //set system font with custom size
- var fontForDayLabel: JBFont {
-    return JBFont(name: "", size: .large)
- }
- 
- ````
+ */
+-(SelectionShape)selectionShape;
+/**
+ font of the date labels.
  */
 -(UIFont*)fontForDayLabel;
 -(UIFont*)fontForWeekDaysViewText;
+-(UIFont*)fontForTopbarText;
 
 /**
  Determines the height ratio of the weekDaysView and top toolbar compared to the total height
@@ -151,28 +152,6 @@ Implementing this variable is optional. It's default is set to false.
  Implementing this variable is optional. It's default is set the current date.
  */
 -(NSDate*)dateToShow;
-
-#pragma mark - Selection Color appearance properties
-
-///color of the selection circle for dates that aren't today
--(UIColor*)colorForSelectionCircleForOtherDate;
-
-///color of the selection circle for today
--(UIColor*)colorForSelectionCircleForToday;
-
-///color of the semi selected selection circle (that shows on a long press)
--(UIColor*)colorForSemiSelectedSelectionCircle;
-
-/**
- Determines the shape that is used to indicate a selected date. Possiblilities are:
- .circle, .square, .roundedRect
- 
- - note:
- Implementing this variable is optional. It's default is set to square.
- 
- */
--(SelectionShape)selectionShape;
-
 
 @end
 

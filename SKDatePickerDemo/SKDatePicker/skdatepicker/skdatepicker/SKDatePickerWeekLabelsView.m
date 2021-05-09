@@ -47,7 +47,7 @@
     {
         return [self.datePickerView.delegate colorForWeekLabelsText];
     }
-    return [UIColor darkTextColor];
+    return nil;
 }
 #pragma mark - Setup
 
@@ -61,15 +61,7 @@
     
     //get weekday name symbols
     NSCalendar* cal = [NSCalendar currentCalendar];
-//    NSString * preferredLanguage = [NSBundle mainBundle].preferredLocalizations.firstObject;
-//    if (preferredLanguage)
-//    {
-//        if([self.datePickerView.delegate respondsToSelector:@selector(shouldLocalize)] && [self.datePickerView.delegate shouldLocalize])
-//        {
-//            cal.locale = [NSLocale localeWithLocaleIdentifier:preferredLanguage];
-//
-//        }
-//    }
+
     if ([self.datePickerView.delegate respondsToSelector:@selector(preferredLocal)])
     {
         cal.locale = [self.datePickerView.delegate preferredLocal];
@@ -104,11 +96,7 @@
     {
         //this containerView is used to prevent visible stretching of the weekDaylabel while turning the device
         UIView* labelContainerView = [UIView new];
-        if([self.datePickerView.delegate respondsToSelector:@selector(colorForWeekDaysViewBackground)])
-        {
-            
-            labelContainerView.backgroundColor = [self.datePickerView.delegate colorForWeekDaysViewBackground];
-        }
+        
         [self addArrangedSubview:labelContainerView];
         
         UILabel* weekDayLabel = [UILabel new];
@@ -121,7 +109,11 @@
         
         [NSLayoutConstraint addSKCenterXAndYConstraints:weekDayLabel superView:labelContainerView];
     }
-
+    if([self.datePickerView.delegate respondsToSelector:@selector(colorForWeekDaysViewBackground)])
+    {
+        
+        self.backgroundColor = [self.datePickerView.delegate colorForWeekDaysViewBackground];
+    }
     
 }
 
@@ -134,25 +126,17 @@
 
 -(void)updateLayout
 {
-    if (![self.datePickerView.delegate respondsToSelector:@selector(fontForWeekDaysViewText)])
+    if ([self.datePickerView.delegate respondsToSelector:@selector(fontForWeekDaysViewText)])
     {
-        return;
-    }
-
-    //get preferred font
-    UIFont* preferredFont = [self.datePickerView.delegate fontForWeekDaysViewText];
-    
-    if (preferredFont == nil)
-    {
-        //get preferred size
-        CGFloat sizeOfFont = self.frame.size.height / 2;
-        preferredFont = [UIFont systemFontOfSize:sizeOfFont weight:UIFontWeightSemibold];
-    }
-    for (int i = 0; i < self.weekdayLabels.count; i++)
-    {
-        NSString* labelText = self.weekdayNameSymbols[i];
-        UILabel* label = self.weekdayLabels[i];
-        label.attributedText = [[NSMutableAttributedString alloc] initWithString:labelText attributes:@{NSFontAttributeName:preferredFont}];
+        //get preferred font
+        UIFont* preferredFont = [self.datePickerView.delegate fontForWeekDaysViewText];
+        
+        for (int i = 0; i < self.weekdayLabels.count; i++)
+        {
+            NSString* labelText = self.weekdayNameSymbols[i];
+            UILabel* label = self.weekdayLabels[i];
+            label.attributedText = [[NSMutableAttributedString alloc] initWithString:labelText attributes:@{NSFontAttributeName:preferredFont}];
+        }
     }
 }
 @end
