@@ -10,6 +10,7 @@
 #import "SKDatePickerMonthView.h"
 #import "SKDatePickerManager.h"
 #import "NSLayoutConstraint+SKConstraint.h"
+#import "SKDate.h"
 
 typedef NS_ENUM(NSInteger, MonthViewIdentifier)
 {
@@ -57,6 +58,23 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
     return self;
 }
 
+-(void)reload:(NSDate*)presentedDate
+{
+    NSInteger newDateMonth = [self.datePickerView.calendar component:NSCalendarUnitMonth fromDate:presentedDate];
+    NSInteger firstDateMonth = [self.datePickerView.calendar component:NSCalendarUnitMonth fromDate:self.presentedMonthView.monthInfo.monthStartDay];
+    if (newDateMonth != firstDateMonth)
+    {
+        for (UIView* view in self.monthViews.allValues) {
+            [view removeFromSuperview];
+        }
+        self.presentedMonthView = [[SKDatePickerMonthView alloc] initWithPickerView:self.datePickerView date:presentedDate isPresented:YES];
+        
+        [self.presentedMonthView createWeekViews];
+        [self addInitialMonthViews:presentedDate];
+    }
+    
+    [self reSelectPeriodDays];
+}
 #pragma mark - Adding of MonthViews
 
 /**
@@ -334,10 +352,7 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
 -(void)reSelectPeriodDays
 {
     //NSLog(@"%s,%@ - %@",__FUNCTION__,self.startDate,self.endDate);
-    if ([self.datePickerView.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)])
-    {
-        [self.datePickerView.delegate didSelectContinueDayFrom:self.startDate toEnd:self.endDate];
-    }
+    
     for (SKDatePickerMonthView* monthView in self.monthViews.allValues)
     {
         if (self.startDate == nil && self.endDate == nil)
@@ -352,6 +367,10 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
         {
             [monthView selectPeriod:self.startDate end:self.endDate];
         }
+    }
+    if ([self.datePickerView.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)])
+    {
+        [self.datePickerView.delegate didSelectContinueDayFrom:self.startDate toEnd:self.endDate];
     }
 }
 

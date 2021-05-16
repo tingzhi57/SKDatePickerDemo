@@ -12,6 +12,7 @@
 #import "SKDatePickerManager.h"
 #import "NSLayoutConstraint+SKConstraint.h"
 #import "SKDatePickerContentControll.h"
+#import "NSDate+SKDateCategory.h"
 
 @interface SKDatePickerView()
 
@@ -22,31 +23,65 @@
 @property (nonatomic,strong) UILabel* dateLabel;
 @property (nonatomic,strong) UIView* topToolBar;
 @property (nonatomic,strong) NSDateFormatter  * dateFormatter;
+@property (nonatomic, strong) NSDate* startDateToPresent;
+@property (nonatomic, strong) NSDate* endDateToPresent;
 
 @end
 
 @implementation SKDatePickerView
+#pragma mark - Initialization
+-(instancetype)init
+{
+    self = [super init];
+    [self basicInit];
+    return self;
+}
+
+-(instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    [self basicInit];
+    return self;
+}
+
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    [self basicInit];
+    return self;
+}
 
 -(void)setDelegate:(id<SKDatePickerViewDelegate>)delegate
 {
     _delegate = delegate;
     [self commonInit];
 }
-#pragma mark - Initialization
 
--(void)commonInit
+-(void)basicInit
 {
     //initialize datePickerManager
     if (_manager == nil)
     {
         _manager = [[SKDatePickerManager alloc] initWithPickerView:self];
     }
+}
+
+-(void)commonInit
+{
     //initialize contentController with preferred (or current) date
-    if ([self.delegate respondsToSelector:@selector(dateToShow)]) {
-        _dateToPresent = [self.delegate dateToShow];
+    if (_dateToPresent == nil)
+    {
+        if ([self.delegate respondsToSelector:@selector(dateToShow)]) {
+            _dateToPresent = [[self.delegate dateToShow] stripped];
+        }
+        else if(self.startDateToPresent)
+        {
+            _dateToPresent = self.startDateToPresent;
+        }
+        else
+            _dateToPresent = [[NSDate date] stripped];
     }
-    else
-        _dateToPresent = [NSDate date];
+    
     UIView* containerView = [UIView new];
     [self addSubview:containerView];
     
@@ -92,14 +127,18 @@
     
     if (self.contentController == nil)
     {
-        
         self.contentController = [[SKDatePickerContentControll alloc] initWithPickerView:self frame:self.bounds presentedDate:self.dateToPresent];
-        
+        self.contentController.startDate = self.startDateToPresent;
+        self.contentController.endDate = self.endDateToPresent;
         
         //add scrollView
         [containerView addSubview:self.contentController.scrollView];
         
         [NSLayoutConstraint addEqualToConstraints:self.contentController.scrollView superView:containerView attributes:@[@(NSLayoutAttributeLeft),@(NSLayoutAttributeRight)]];
+        if (self.startDateToPresent != nil || self.endDateToPresent != nil)
+        {
+            [self.contentController reSelectPeriodDays];
+        }
     }
 
     
@@ -140,6 +179,33 @@
     [NSLayoutConstraint activateConstraints:active_constrains];
 }
 
+-(NSCalendar *)calendar
+{
+    return self.manager.calendar;
+}
+
+-(void)presentStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
+{
+    if (startDate != nil && endDate != nil)
+    {
+        NSDate* stripSDate = [startDate stripped];
+        NSDate* stripEDate = [endDate stripped];
+        self.startDateToPresent = [stripSDate earlierDate:stripEDate];
+        self.endDateToPresent = [stripEDate laterDate:stripSDate];
+        if (_dateToPresent == nil)
+        {
+            _dateToPresent = self.startDateToPresent;
+        }
+        if (self.contentController)
+        {
+            self.contentController.startDate = self.startDateToPresent;
+            self.contentController.endDate = self.endDateToPresent;
+            [self.contentController reload:self.startDateToPresent];
+        }
+    }
+}
+
+#pragma mark - Delegate methods
 -(CGFloat)rowViewHeightRatio
 {
     if ([self.delegate respondsToSelector:@selector(rowViewHeightRatio)])

@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)reSelectPeriodDays;
 -(BOOL)calculateStartDateAndEndDate:(NSDate*)selectDate;
+
+-(void)reload:(NSDate*)presentedDate;
 @end
 
 NS_ASSUME_NONNULL_END
