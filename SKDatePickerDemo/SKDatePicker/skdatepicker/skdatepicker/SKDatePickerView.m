@@ -71,7 +71,8 @@
     //initialize contentController with preferred (or current) date
     if (_dateToPresent == nil)
     {
-        if ([self.delegate respondsToSelector:@selector(dateToShow)]) {
+        if ([self.delegate respondsToSelector:@selector(dateToShow)] && [self.delegate dateToShow])
+        {
             _dateToPresent = [[self.delegate dateToShow] stripped];
         }
         else if(self.startDateToPresent)

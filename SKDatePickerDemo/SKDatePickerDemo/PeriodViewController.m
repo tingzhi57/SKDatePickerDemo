@@ -23,6 +23,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    
+    self.datePickerView.delegate = self;
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     NSCalendar* calendar = self.datePickerView.calendar;
     NSDateComponents* tmpComponent = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday  | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
     tmpComponent.month += 1;
@@ -30,12 +38,9 @@
     NSDate* nextMonthStartDate = [calendar dateFromComponents:tmpComponent];
     tmpComponent.day += 7;
     NSDate* nextWeekEndDate = [calendar dateFromComponents:tmpComponent];
-    
     [self.datePickerView presentStartDate:nextMonthStartDate endDate:nextWeekEndDate];
     
-    self.datePickerView.delegate = self;
 }
-
 /*
 #pragma mark - Navigation
 
@@ -91,5 +96,10 @@
 -(UIColor *)colorForSelectedDayText
 {
     return [UIColor whiteColor];
+}
+
+-(NSDate *)dateToShow
+{
+    return nil;
 }
 @end
