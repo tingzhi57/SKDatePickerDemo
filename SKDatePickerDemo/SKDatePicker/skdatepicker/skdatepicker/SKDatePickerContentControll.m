@@ -22,7 +22,6 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
 @interface SKDatePickerContentControll ()<UIScrollViewDelegate>
 
 @property (nonatomic, weak) SKDatePickerView* datePickerView;
-@property (nonatomic, strong) SKDatePickerMonthView* presentedMonthView;
 @property (nonatomic, strong) NSMutableDictionary<NSNumber*,SKDatePickerMonthView*>* monthViews;
 
 @property (nonatomic, assign) NSInteger currentPage;
@@ -51,9 +50,6 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
     
     //create the current Monthview for the current date and fill it with weekviews.
     self.monthViews = [NSMutableDictionary dictionaryWithCapacity:3];
-    self.presentedMonthView = [[SKDatePickerMonthView alloc] initWithPickerView:self.datePickerView date:date isPresented:YES];
-    
-    [self.presentedMonthView createWeekViews];
     [self addInitialMonthViews:date];
     return self;
 }
@@ -61,15 +57,15 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
 -(void)reload:(NSDate*)presentedDate
 {
     NSInteger newDateMonth = [self.datePickerView.calendar component:NSCalendarUnitMonth fromDate:presentedDate];
-    NSInteger firstDateMonth = [self.datePickerView.calendar component:NSCalendarUnitMonth fromDate:self.presentedMonthView.monthInfo.monthStartDay];
+    SKDatePickerMonthView* presentedMonthView = self.monthViews[@(MonthViewIdentifierPresented)];
+    
+    NSInteger firstDateMonth = [self.datePickerView.calendar component:NSCalendarUnitMonth fromDate:presentedMonthView.monthInfo.monthStartDay];
     if (newDateMonth != firstDateMonth)
     {
         for (UIView* view in self.monthViews.allValues) {
             [view removeFromSuperview];
         }
-        self.presentedMonthView = [[SKDatePickerMonthView alloc] initWithPickerView:self.datePickerView date:presentedDate isPresented:YES];
         
-        [self.presentedMonthView createWeekViews];
         [self addInitialMonthViews:presentedDate];
     }
     
@@ -88,7 +84,8 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
 {
     
     //add the three monthViews to the scrollview
-    [self addMonthView:self.presentedMonthView withIdentifier:MonthViewIdentifierPresented];
+    [self addMonthView:[self getOtherMonthView:date withIdentifier:MonthViewIdentifierPresented] withIdentifier:MonthViewIdentifierPresented];
+    
     [self addMonthView:[self getOtherMonthView:date withIdentifier:MonthViewIdentifierPrevious] withIdentifier:MonthViewIdentifierPrevious];
     [self addMonthView:[self getOtherMonthView:date withIdentifier:MonthViewIdentifierNext] withIdentifier:MonthViewIdentifierNext];
 }
@@ -104,17 +101,16 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
         comps.month -= 1;
     }else if (identifier == MonthViewIdentifierNext)
     {
-        
         comps.month += 1;
     }
     NSDate* firstDateOfPreviousMonth = [cal dateFromComponents:comps];
-    SKDatePickerMonthView* previousMonthView = [[SKDatePickerMonthView alloc] initWithPickerView:self.datePickerView date:firstDateOfPreviousMonth isPresented:false];
+    SKDatePickerMonthView* newMonthView = [[SKDatePickerMonthView alloc] initWithPickerView:self.datePickerView date:firstDateOfPreviousMonth isPresented:identifier == MonthViewIdentifierPresented];
 
     //this is what gives new new monthView it's initial frame
-    previousMonthView.frame = self.scrollView.frame;
-    [previousMonthView createWeekViews];
+    newMonthView.frame = self.scrollView.frame;
+    [newMonthView createWeekViews];
     
-    return previousMonthView;
+    return newMonthView;
 }
 
 /**
@@ -376,10 +372,10 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
 
 -(BOOL)checkVaildPeriod:(NSDate*)start end:(NSDate*)end
 {
-    if (start != nil && end != nil)
+    if (start != nil && end != nil && [self.datePickerView.delegate respondsToSelector:@selector(maxPeriodDays)])
     {
         NSTimeInterval gap = fabs([start timeIntervalSinceDate:end]);
-        double maxDays = MAX_PERIOD_SELECT_DAYS;
+        double maxDays = [self.datePickerView.delegate maxPeriodDays];
         return gap < maxDays * 24 * 60 * 60;
     }
     return YES;
@@ -410,11 +406,12 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
     else
     {
         //Only if startDate&endDate aren't nil.
-        NSDate* tmpDate = [self.startDate earlierDate:selectDate];
-        if ([tmpDate isEqualToDate:self.startDate])
+        //New select date is between startdate and enddate, shrink the period. Otherwise reselect the period.
+        NSTimeInterval startTimeInterval = [selectDate timeIntervalSinceDate:self.startDate];
+        NSTimeInterval endTimeInterval = [selectDate timeIntervalSinceDate:self.endDate];
+        if (startTimeInterval >= 0 && endTimeInterval <= 0)
         {
-            tmpDate = [self.endDate laterDate:selectDate];
-            if ([tmpDate isEqualToDate:self.endDate])
+            if (fabs(startTimeInterval) < fabs(endTimeInterval))
             {
                 start = selectDate;
                 end = self.endDate;
@@ -427,7 +424,8 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
         }
         else
         {
-            end = self.startDate;
+            //reselect start date as new date and set end date to nil
+            end = nil;
             start = selectDate;
         }
     }

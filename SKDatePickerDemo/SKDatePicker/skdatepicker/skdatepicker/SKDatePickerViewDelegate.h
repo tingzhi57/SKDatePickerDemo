@@ -7,7 +7,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#define MAX_PERIOD_SELECT_DAYS 45
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,38 +24,43 @@ typedef NS_ENUM(NSInteger, SelectionShape)
 @protocol SKDatePickerViewDelegate <NSObject>
 @required
 /**
- It's called when the user selected a day
- - parameter date: the date of the user selected
- - note:
- Implementing this method is mandatory
+ * @brief It's called when the user selected a day
+ * @param date the date of the user selected
+ *
+ * - note:Implementing this method is mandatory
  */
 -(void)didSelectDay:(NSDate*)date;
 
 
 @optional
 /**
- Determines if user can select a period
- - note:
- Implementing this method is optional. Default set to false.
+ * @brief Determines if user can select a period
+ *
+ *- note:Implementing this method is optional. Default set to false.
  */
 -(BOOL)shouldContinueSelection;
 
 /**
- It's called when the user selected a period
- - parameter
-    startDate: the start date of the user selected
-    endDate: the end date of the user selected
- - note:
- Implementing this method is optional
+ * @brief It's called when the user selected a period
+ * @param startDate the start date of the user selected
+ * @param endDate the end date of the user selected
+ *
+ * - note:Implementing this method is optional
  */
 -(void)didSelectContinueDayFrom:(NSDate*)startDate toEnd:(NSDate*)endDate;
 
 /**
- Warning when the selected period exceeds than 45 days.
- - note:
- Implementing this method is optional.
+ * @brief The max days of selecting a period
+ *
+ * - note:Implementing this method is optional, default no limitation.
  */
--(void)warningSelectTooLargeScope:(NSInteger)maxPeriodDays;
+-(NSInteger)maxPeriodDays;
+/**
+ * @brief Warning when the selected period exceeds than the value of maxPeriodDays.
+ *
+ * - note:Implementing this method is optional.
+ */
+-(void)warningSelectTooLargeScope;
 /**
  Sets the first day of the week.
  - note:

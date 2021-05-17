@@ -202,6 +202,7 @@
             self.contentController.startDate = self.startDateToPresent;
             self.contentController.endDate = self.endDateToPresent;
             [self.contentController reload:self.startDateToPresent];
+            [self setNeedsLayout];
         }
     }
 }
@@ -242,9 +243,9 @@
         {
             [self.contentController reSelectPeriodDays];
         }
-        else if([self.delegate respondsToSelector:@selector(warningSelectTooLargeScope:)])
+        else if([self.delegate respondsToSelector:@selector(warningSelectTooLargeScope)])
         {
-            [self.delegate warningSelectTooLargeScope:MAX_PERIOD_SELECT_DAYS];
+            [self.delegate warningSelectTooLargeScope];
         }
     }
 }

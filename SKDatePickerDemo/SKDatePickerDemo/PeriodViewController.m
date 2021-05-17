@@ -78,9 +78,14 @@
     self.warningLabel.text = @"";
 }
 
--(void)warningSelectTooLargeScope:(NSInteger)maxPeriodDays
+-(NSInteger)maxPeriodDays
 {
-    self.warningLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Couldn't exceed %d days", nil),(int)maxPeriodDays];
+    return 90;
+}
+
+-(void)warningSelectTooLargeScope
+{
+    self.warningLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Couldn't exceed %d days", nil),(int)[self maxPeriodDays]];
 }
 
 //-(BOOL)shouldShowMonthOutDates
