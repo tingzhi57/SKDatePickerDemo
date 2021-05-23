@@ -68,7 +68,7 @@
     if (self.dateFormatter == nil)
     {
         self.dateFormatter = [[NSDateFormatter alloc] init];
-        [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        [self.dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         self.dateFormatter.locale = [NSLocale autoupdatingCurrentLocale];
     }
     
@@ -92,6 +92,11 @@
 //{
 //    return YES;
 //}
+
+-(BOOL)shouldShowTimeField
+{
+    return YES;
+}
 
 -(SelectionShape)selectionShape
 {

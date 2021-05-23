@@ -13,6 +13,7 @@
 #import "NSLayoutConstraint+SKConstraint.h"
 #import "SKDatePickerContentControll.h"
 #import "NSDate+SKDateCategory.h"
+#import "SKSelectedDatetimeField.h"
 
 @interface SKDatePickerView()
 
@@ -22,6 +23,7 @@
 @property (nonatomic,strong) UIButton* previousMonthButton;
 @property (nonatomic,strong) UILabel* dateLabel;
 @property (nonatomic,strong) UIView* topToolBar;
+@property (nonatomic,strong) SKSelectedDatetimeField* datetimeField;
 @property (nonatomic,strong) NSDateFormatter  * dateFormatter;
 @property (nonatomic, strong) NSDate* startDateToPresent;
 @property (nonatomic, strong) NSDate* endDateToPresent;
@@ -98,8 +100,18 @@
     NSLayoutConstraint * r_constrain = [containerView.rightAnchor constraintEqualToAnchor:self.rightAnchor];
     r_constrain.priority = UILayoutPriorityDefaultHigh;
     [active_constrains addObject:r_constrain];
+    /*
+     The ratio of height vs width,
+     contentController has 1:1 ratio firstly.
+     week day labels has rowViewHeightRatio value.
+     topbar and datefield has the same value as weekday label view if they need show.
+     */
     float totalHeightRatio = 1.0f + [self rowViewHeightRatio];
     if ([self shouldShowTopToolBar])
+    {
+        totalHeightRatio += [self rowViewHeightRatio];
+    }
+    if ([self shouldDatetimeField])
     {
         totalHeightRatio += [self rowViewHeightRatio];
     }
@@ -108,11 +120,41 @@
     w_constrain.priority = UILayoutPriorityDefaultHigh;
     [active_constrains addObject:w_constrain];
     
+    
+    
+    if(self.datetimeField == nil)
+    {
+        self.datetimeField = [SKSelectedDatetimeField new];
+        [containerView addSubview:self.datetimeField];
+        [NSLayoutConstraint addEqualToConstraints:self.datetimeField superView:containerView attributes:@[@(NSLayoutAttributeLeft),@(NSLayoutAttributeRight),@(NSLayoutAttributeTop)]];
+    }
+    
+    if ([self shouldDatetimeField])
+    {
+        [active_constrains addObject:[self.datetimeField.heightAnchor constraintEqualToAnchor:containerView.heightAnchor multiplier:[self rowViewHeightRatio]]];
+        
+//        [active_constrains addObject:[self.datetimeField.topAnchor constraintEqualToAnchor:self.contentController.scrollView.bottomAnchor]];
+        
+        [self.datetimeField setupUI:self otherContraints:active_constrains];
+        self.datetimeField.hidden = NO;
+        [self.datetimeField notifySelectedDateChanged:self.dateToPresent];
+        if ([self shouldContinueSelection])
+        {
+            [self.datetimeField notifySelectedPeriodChanged:self.startDateToPresent to:self.endDateToPresent];
+        }
+    }
+    else
+    {
+        [active_constrains addObject:[self.datetimeField.heightAnchor constraintEqualToConstant:0]];
+        self.datetimeField.hidden = YES;
+    }
+    
     if (self.topToolBar == nil)
     {
         self.topToolBar = [UIView new];
         [containerView addSubview:self.topToolBar];
-        [NSLayoutConstraint addEqualToConstraints:self.topToolBar superView:containerView attributes:@[@(NSLayoutAttributeTop),@(NSLayoutAttributeLeft),@(NSLayoutAttributeRight)]];
+        [NSLayoutConstraint addEqualToConstraints:self.topToolBar superView:containerView attributes:@[@(NSLayoutAttributeLeft),@(NSLayoutAttributeRight)]];
+        [active_constrains addObject:[self.topToolBar.topAnchor constraintEqualToAnchor:self.datetimeField.bottomAnchor]];
     }
     
     if ([self shouldShowTopToolBar])
@@ -170,13 +212,14 @@
     
     [active_constrains addObject:[self.contentController.scrollView.topAnchor constraintEqualToAnchor:self.weekdaysView.bottomAnchor]];
     
-    [active_constrains addObject:[self.contentController.scrollView.bottomAnchor constraintLessThanOrEqualToAnchor:containerView.bottomAnchor]];
     
     [active_constrains addObject:[self.contentController.scrollView.topAnchor constraintEqualToAnchor:self.weekdaysView.bottomAnchor]];
     
     
     [active_constrains addObject:[self.weekdaysView.topAnchor constraintEqualToAnchor:self.topToolBar.bottomAnchor]];
     
+    
+    [active_constrains addObject:[self.contentController.scrollView.bottomAnchor constraintLessThanOrEqualToAnchor:containerView.bottomAnchor]];
     [NSLayoutConstraint activateConstraints:active_constrains];
 }
 
@@ -204,9 +247,17 @@
             [self.contentController reload:self.startDateToPresent];
             [self setNeedsLayout];
         }
+        [self.datetimeField notifySelectedPeriodChanged:self.startDateToPresent to:self.endDateToPresent];
     }
 }
 
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    if ([self shouldDatetimeField]) {
+        [self.datetimeField endEditing:YES];
+    }
+}
 #pragma mark - Delegate methods
 -(CGFloat)rowViewHeightRatio
 {
@@ -255,7 +306,15 @@
 {
     self.selectedDateView = dayView;
     if (![self shouldContinueSelection])
-        [self.delegate didSelectDay:dayView.date];
+    {
+        if ([self shouldDatetimeField])
+        {
+            [self.datetimeField notifySelectedDateChanged:dayView.date];
+            [self.delegate didSelectDay:self.datetimeField.dateAndTime];
+        }
+        else
+            [self.delegate didSelectDay:dayView.date];
+    }
 }
 
 -(void)setPresentedMonthView:(SKDatePickerMonthView *)presentedMonthView
@@ -272,6 +331,24 @@
 -(NSInteger)firstWeekDay
 {
     return [self.manager startdayOfWeek];
+}
+
+-(void)didSelectContinueDayFrom:(NSDate*)start to:(NSDate*)end
+{
+    NSDate* startDate = start;
+    NSDate* endDate = end;
+    
+    if ([self shouldDatetimeField])
+    {
+        [self.datetimeField notifySelectedPeriodChanged:start to:end];
+        startDate = self.datetimeField.dateAndTime;
+        endDate = self.datetimeField.endDateAndTime;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)])
+    {
+        [self.delegate didSelectContinueDayFrom:startDate toEnd:endDate];
+    }
 }
 
 #pragma mark - Layout
@@ -397,6 +474,16 @@
     
     [self.previousMonthButton setTitleColor:self.dateLabel.textColor forState:UIControlStateNormal];
     [self.nextMonthButton setTitleColor:self.dateLabel.textColor forState:UIControlStateNormal];
+}
+
+#pragma mark - Datetime field
+-(BOOL)shouldDatetimeField
+{
+    if ([self.delegate respondsToSelector:@selector(shouldShowTimeField)])
+    {
+        return [self.delegate shouldShowTimeField];
+    }
+    return NO;
 }
 
 #pragma mark - Colors

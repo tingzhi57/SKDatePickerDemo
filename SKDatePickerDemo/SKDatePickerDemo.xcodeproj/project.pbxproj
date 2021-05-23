@@ -16,7 +16,7 @@
 		4ECD225026442881000D19E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ECD224F26442881000D19E3 /* Assets.xcassets */; };
 		4ECD225326442881000D19E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ECD225126442881000D19E3 /* LaunchScreen.storyboard */; };
 		4ECD225626442881000D19E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD225526442881000D19E3 /* main.m */; };
-		4ECD226026442883000D19E3 /* SKDatePickerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD225F26442883000D19E3 /* SKDatePickerDemoTests.m */; };
+		4ECD226026442883000D19E3 /* SKDatePickerDemoTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD225F26442883000D19E3 /* SKDatePickerDemoTests.mm */; };
 		4ECD226B26442883000D19E3 /* SKDatePickerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD226A26442883000D19E3 /* SKDatePickerDemoUITests.m */; };
 		4ECD228326442910000D19E3 /* skdatepicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECD227F264428FE000D19E3 /* skdatepicker.framework */; };
 		4ECD228926442C6F000D19E3 /* PeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD228826442C6F000D19E3 /* PeriodViewController.m */; };
@@ -73,7 +73,7 @@
 		4ECD225426442881000D19E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4ECD225526442881000D19E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4ECD225B26442883000D19E3 /* SKDatePickerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKDatePickerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECD225F26442883000D19E3 /* SKDatePickerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerDemoTests.m; sourceTree = "<group>"; };
+		4ECD225F26442883000D19E3 /* SKDatePickerDemoTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SKDatePickerDemoTests.mm; sourceTree = "<group>"; };
 		4ECD226126442883000D19E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4ECD226626442883000D19E3 /* SKDatePickerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKDatePickerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECD226A26442883000D19E3 /* SKDatePickerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKDatePickerDemoUITests.m; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		4ECD225E26442883000D19E3 /* SKDatePickerDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				4ECD225F26442883000D19E3 /* SKDatePickerDemoTests.m */,
+				4ECD225F26442883000D19E3 /* SKDatePickerDemoTests.mm */,
 				4ECD226126442883000D19E3 /* Info.plist */,
 			);
 			path = SKDatePickerDemoTests;
@@ -356,7 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4ECD226026442883000D19E3 /* SKDatePickerDemoTests.m in Sources */,
+				4ECD226026442883000D19E3 /* SKDatePickerDemoTests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

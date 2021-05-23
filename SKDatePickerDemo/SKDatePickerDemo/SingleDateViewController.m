@@ -46,7 +46,7 @@
     if (self.dateFormatter == nil)
     {
         self.dateFormatter = [[NSDateFormatter alloc] init];
-        [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        [self.dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     }
     
     UIAlertController* alertControl = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Selected Date", @"Selected Date") message:[self.dateFormatter stringFromDate:date] preferredStyle:UIAlertControllerStyleAlert];
@@ -61,6 +61,14 @@
 }
 
 -(BOOL)shouldShowMonthOutDates
+{
+    return YES;
+}
+//-(BOOL)shouldHideTopToolBar
+//{
+//    return YES;
+//}
+-(BOOL)shouldShowTimeField
 {
     return YES;
 }
@@ -107,5 +115,10 @@
 -(UIColor *)colorForSelectedDayText
 {
     return [self colorForTopbarText];
+}
+
+-(UIColor *)colorForDayLabelOutOfMonth
+{
+    return [UIColor lightGrayColor];
 }
 @end

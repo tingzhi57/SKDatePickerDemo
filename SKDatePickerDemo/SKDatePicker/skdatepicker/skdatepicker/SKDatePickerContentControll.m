@@ -364,10 +364,8 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
             [monthView selectPeriod:self.startDate end:self.endDate];
         }
     }
-    if ([self.datePickerView.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)])
-    {
-        [self.datePickerView.delegate didSelectContinueDayFrom:self.startDate toEnd:self.endDate];
-    }
+    
+    [self.datePickerView didSelectContinueDayFrom:self.startDate to:self.endDate];
 }
 
 -(BOOL)checkVaildPeriod:(NSDate*)start end:(NSDate*)end

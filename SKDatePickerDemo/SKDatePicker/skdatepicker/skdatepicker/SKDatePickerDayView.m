@@ -118,6 +118,13 @@
         {
             self.textLabel.textColor = [self.datePickerView colorForDayLabelInMonth];
         }
+        
+        if ([self isToday] && [self.datePickerView.delegate respondsToSelector:@selector(colorForToday)])
+        {
+            self.textLabel.textColor = [self.datePickerView.delegate colorForToday];
+        }
+        else
+            self.textLabel.textColor = nil;
     }
     else
     {
@@ -137,12 +144,6 @@
         }
     }
     
-    if ([self isToday] && [self.datePickerView.delegate respondsToSelector:@selector(colorForToday)])
-    {
-        self.textLabel.textColor = [self.datePickerView.delegate colorForToday];
-    }
-    else
-        self.textLabel.textColor = nil;
 }
 
 -(BOOL)isToday

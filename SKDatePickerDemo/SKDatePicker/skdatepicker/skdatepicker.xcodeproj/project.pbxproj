@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E65EEF9265A457800A07CA9 /* SKSelectedDatetimeField.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65EEF7265A457800A07CA9 /* SKSelectedDatetimeField.h */; };
+		4E65EEFA265A457800A07CA9 /* SKSelectedDatetimeField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65EEF8265A457800A07CA9 /* SKSelectedDatetimeField.m */; };
 		4ECD2187263FFEBD000D19E3 /* skdatepicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECD217D263FFEBD000D19E3 /* skdatepicker.framework */; };
 		4ECD218C263FFEBD000D19E3 /* skdatepickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD218B263FFEBD000D19E3 /* skdatepickerTests.m */; };
 		4ECD218E263FFEBD000D19E3 /* skdatepicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD2180263FFEBD000D19E3 /* skdatepicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E65EEF7265A457800A07CA9 /* SKSelectedDatetimeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKSelectedDatetimeField.h; sourceTree = "<group>"; };
+		4E65EEF8265A457800A07CA9 /* SKSelectedDatetimeField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKSelectedDatetimeField.m; sourceTree = "<group>"; };
 		4ECD217D263FFEBD000D19E3 /* skdatepicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = skdatepicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECD2180263FFEBD000D19E3 /* skdatepicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skdatepicker.h; sourceTree = "<group>"; };
 		4ECD2181263FFEBD000D19E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				4ECD222A26414D95000D19E3 /* SKDatePickerWeekLabelsView.m */,
 				4ECD222D26416C04000D19E3 /* SKDatePickerContentControll.h */,
 				4ECD222E26416C04000D19E3 /* SKDatePickerContentControll.m */,
+				4E65EEF7265A457800A07CA9 /* SKSelectedDatetimeField.h */,
+				4E65EEF8265A457800A07CA9 /* SKSelectedDatetimeField.m */,
 			);
 			path = skdatepicker;
 			sourceTree = "<group>";
@@ -175,6 +181,7 @@
 				4ECD21B32640058A000D19E3 /* SKDatePickerSelectionView.h in Headers */,
 				4ECD218E263FFEBD000D19E3 /* skdatepicker.h in Headers */,
 				4ECD21D22640443A000D19E3 /* NSDate+SKDateCategory.h in Headers */,
+				4E65EEF9265A457800A07CA9 /* SKSelectedDatetimeField.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +285,7 @@
 				4ECD21B0263FFFDD000D19E3 /* SKDatePickerMonthView.m in Sources */,
 				4ECD21B42640058A000D19E3 /* SKDatePickerSelectionView.m in Sources */,
 				4ECD223026416C04000D19E3 /* SKDatePickerContentControll.m in Sources */,
+				4E65EEFA265A457800A07CA9 /* SKSelectedDatetimeField.m in Sources */,
 				4ECD21AC263FFFC5000D19E3 /* SKDatePickerWeekView.m in Sources */,
 				4ECD21DD264108B7000D19E3 /* SKDatePickerManager.m in Sources */,
 				4ECD222C26414D95000D19E3 /* SKDatePickerWeekLabelsView.m in Sources */,

@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(BOOL)dateIsSelectable:(NSDate*)date;
 -(void)didTapDayView:(SKDatePickerDayView *)dayView;
+-(void)didSelectContinueDayFrom:(NSDate*)start to:(NSDate*)end;
 
 -(NSInteger)firstWeekDay;
 -(void)loadNextView;

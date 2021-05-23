@@ -55,59 +55,71 @@ typedef NS_ENUM(NSInteger, SelectionShape)
  * - note:Implementing this method is optional, default no limitation.
  */
 -(NSInteger)maxPeriodDays;
+
 /**
  * @brief Warning when the selected period exceeds than the value of maxPeriodDays.
  *
  * - note:Implementing this method is optional.
  */
 -(void)warningSelectTooLargeScope;
+
 /**
- Sets the first day of the week.
- - note:
- Implementing this variable is optional. It's default is set to the locale.
+ *@brief Sets the first day of the week.
+ *
+ *- note:Implementing this variable is optional. It's default is set to the locale.
  */
 -(NSInteger)firstWeekDay;
+
 /**
- It's called when the user swiped (or manually moved) to another month
- - parameter monthView: the monthView that is now 'on screen'
- - note:
- Implementing this method is optional.
+ * @brief It's called when the user swiped (or manually moved) to another month
+ * @param monthView the monthView that is now 'on screen'
+ *
+ *- note:Implementing this method is optional.
  */
 -(void)didPresentOtherMonth:(SKDatePickerMonthView*)monthView;
 
 /**
- It's called to check if any particular date is selectable by the picker
- - parameter date: the date to check if allowed
- - note:
- Implementing this method is optional.
+ * @brief It's called to check if any particular date is selectable by the picker
+ * @param date the date to check if allowed
+ *
+ * - note:Implementing this method is optional.
  */
 -(BOOL)shouldAllowSelectionOfDay:(NSDate*)date;
 
 /**
- Determines if a month should also show the dates of the previous and next month
- - note:
- Implementing this variable is optional. It's default is set to false.
+ * @brief Determines if a month should also show the dates of the previous and next month
+ *
+ * - note:Implementing this method is optional. It's default is set to false.
  */
 -(BOOL)shouldShowMonthOutDates;
 
 /**
- Determines if the weekday symbols and the month description should follow available localizations
- - note:
- Implementing this variable is optional. It's default is set to false. This means that the weekday symbols
- and the month description will be in the same language as the device language. If you want it to conform to the
- localization of your app, return true here. If you return true and your app is not localized, the weekday symbols and
- the month description will be in the development language.
+ * @brief Determines if the weekday symbols and the month description should follow available localizations
+ *
+ * - note:Implementing this method is optional. It's default is set to false. This means that the weekday symbols and the month description will be in the same language as the device language. If you want it to conform to the localization of your app, return true here. If you return true and your app is not localized, the weekday symbols and the month description will be in the development language.
  */
 -(NSLocale*)preferredLocal;
--(NSString*)monthFormatString;
-
 
 /**
- Determines if hide month label or next|previous moth button
-- note:
-Implementing this variable is optional. It's default is set to false.
+ * @brief Determines if hide month label or next|previous moth button
+ *
+ * - note:Implementing this method is optional. It's default is set to false.
  */
 -(BOOL)shouldHideTopToolBar;
+
+/**
+ * @brief Determines the month label's text format.
+ *
+ * - note:Implementing this method is optional. Default: "MMM yyyy"
+ */
+-(NSString*)monthFormatString;
+
+/**
+ * @brief Determines if show time filed. If yes, the picker can also set time value.
+ *
+ * - note:Implementing this method is optional. It's default is set to false.
+ */
+-(BOOL)shouldShowTimeField;
 
 #pragma mark - General appearance properties
 ///color of any date label text that falls within the presented month
