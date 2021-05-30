@@ -46,8 +46,8 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKDatePickerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-commonInit"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "SKDatePickerDemo/SingleDateViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "SingleDateViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -126,10 +126,8 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKDatePickerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "506"
-            endingLineNumber = "506"
-            landmarkName = "SKDatePickerView"
-            landmarkType = "3">
+            startingLineNumber = "525"
+            endingLineNumber = "525">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -222,8 +220,8 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKDatePickerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "-presentStartDate:endDate:"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,8 +268,8 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKDatePickerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "-presentStartDate:endDate:"
             landmarkType = "7">
          </BreakpointContent>
@@ -334,8 +332,8 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKDatePickerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "-commonInit"
             landmarkType = "7">
          </BreakpointContent>
@@ -398,8 +396,8 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKDatePickerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "-presentStartDate:endDate:"
             landmarkType = "7">
          </BreakpointContent>
@@ -414,26 +412,10 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKSelectedDatetimeField.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
-            landmarkName = "-validateAndUpdateTimeString:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CBEAAFE7-5B08-463A-B551-A3D6D829AF10"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SKDatePicker/skdatepicker/skdatepicker/SKSelectedDatetimeField.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "-notifySelectedPeriodChanged:to:"
-            landmarkType = "7">
+            startingLineNumber = "277"
+            endingLineNumber = "277"
+            landmarkName = "SKSelectedDatetimeField"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -446,25 +428,9 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKDatePickerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "350"
-            endingLineNumber = "350"
-            landmarkName = "-didSelectContinueDayFrom:to:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F1E006D9-4B6B-4334-BAF0-0A99267E96C1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SKDatePicker/skdatepicker/skdatepicker/SKSelectedDatetimeField.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "SKSelectedDatetimeField"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "SKDatePickerView"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
@@ -478,9 +444,9 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKDatePickerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "-touchesEnded:withEvent:"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "-rowViewHeightRatio"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -494,8 +460,8 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKSelectedDatetimeField.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-endEditing:"
             landmarkType = "7">
          </BreakpointContent>
@@ -510,9 +476,57 @@
             filePath = "SKDatePicker/skdatepicker/skdatepicker/SKSelectedDatetimeField.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "-endEditing:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "197E75D0-9F90-4B57-A89D-61CAA3A2BC8E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SKDatePicker/skdatepicker/skdatepicker/SKColumnPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-cancelColumnPick"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E58F2B85-63B4-433A-96F1-275A9EAB063B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SKDatePicker/skdatepicker/skdatepicker/SKDatePickerView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "SKDatePickerView"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "043AA17B-336E-4398-B825-CAF1EAC42D9A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SKDatePicker/skdatepicker/skdatepicker/SKColumnPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-commonInit"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

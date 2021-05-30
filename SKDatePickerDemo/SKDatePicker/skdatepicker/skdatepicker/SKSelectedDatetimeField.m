@@ -10,28 +10,16 @@
 #import "SKDatePickerViewDelegate.h"
 #import "NSLayoutConstraint+SKConstraint.h"
 #import "NSDate+SKDateCategory.h"
+#import "SKTimePicker.h"
 
-@interface SKSelectedDatetimeField()<UITextFieldDelegate>
+@interface SKSelectedDatetimeField()<SKTimePickerDelegate>
 
 @property (nonatomic, weak) SKDatePickerView* datePickerView;
-@property (nonatomic,strong) UILabel* dateLabel;
-@property (nonatomic,strong) UITextField* timeField;
-
-@property (nonatomic,retain) UILabel* startDateLabel;
-@property (nonatomic,retain) UILabel* seperatorLabel;
-@property (nonatomic,retain) UILabel* endDateLabel;
-@property (nonatomic,retain) UITextField* startTimeField;
-@property (nonatomic,retain) UITextField* endTimeField;
+@property (nonatomic,strong) SKTimePicker* timeField;
+@property (nonatomic,retain) SKTimePicker* startTimeField;
+@property (nonatomic,retain) SKTimePicker* endTimeField;
 
 @property (nonatomic,strong) NSDateFormatter  * datetimeFormatter;
-
-@property (nonatomic,assign) NSUInteger hour;
-@property (nonatomic,assign) NSUInteger minute;
-@property (nonatomic,assign) NSUInteger second;
-
-@property (nonatomic,assign) NSUInteger endHour;
-@property (nonatomic,assign) NSUInteger endMinute;
-@property (nonatomic,assign) NSUInteger endSecond;
 
 @end
 
@@ -49,94 +37,73 @@
     
     if (self.timeField == nil)
     {
-        self.timeField = [UITextField new];
-//        self.timeField.backgroundColor = [UIColor redColor];
-        self.timeField.font = perfectFont;
-        self.timeField.delegate = self;
+        self.timeField = [SKTimePicker new];
+        self.timeField.timer_delegate = self;
+        self.timeField.lastComponent = [self lastTimeComponent];
+        self.timeField.timeFormateString = [self timeFormatString];
         [self addSubview:self.timeField];
-        [NSLayoutConstraint addEqualToConstraints:self.timeField superView:self attributes:@[@(NSLayoutAttributeTop),@(NSLayoutAttributeRight),@(NSLayoutAttributeBottom)]];
+        [NSLayoutConstraint addEqualToConstraints:self.timeField superView:self attributes:@[@(NSLayoutAttributeRight),@(NSLayoutAttributeTop),@(NSLayoutAttributeBottom),@(NSLayoutAttributeHeight)]];
     }
     
     
-    if (self.dateLabel == nil)
-    {
-        self.dateLabel = [UILabel new];
-        self.dateLabel.textAlignment = NSTextAlignmentRight;
-        self.dateLabel.font = perfectFont;
-//        self.dateLabel.backgroundColor = [UIColor blueColor];
-        [self addSubview:self.dateLabel];
-        
-        [NSLayoutConstraint addEqualToConstraints:self.dateLabel superView:self attributes:@[@(NSLayoutAttributeTop),@(NSLayoutAttributeBottom)]];
-    }
-    [otherActiveConstraints addObject:[self.timeField.leftAnchor constraintEqualToAnchor:self.dateLabel.rightAnchor constant:10]];
+//    if (self.dateLabel == nil)
+//    {
+//        self.dateLabel = [UILabel new];
+//        self.dateLabel.textAlignment = NSTextAlignmentRight;
+//        self.dateLabel.font = perfectFont;
+//        [self addSubview:self.dateLabel];
+//        self.dateLabel.translatesAutoresizingMaskIntoConstraints = false;
+//    }
+    float timeRatio = 0.45f;
+    
+//    [otherActiveConstraints addObject:[self.timeField.leftAnchor constraintEqualToAnchor:self.dateLabel.rightAnchor constant:10]];
+    
+    [otherActiveConstraints addObject:[self.timeField.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:timeRatio]];
     
     if ([self.datePickerView shouldContinueSelection])
     {
-        self.endHour = 23;
-        self.endMinute = 59;
-        self.endSecond = 59;
         
-        self.endDateLabel = self.dateLabel;
         self.endTimeField = self.timeField;
+        self.endTimeField.plainField.textAlignment = NSTextAlignmentLeft;
         
-        if (self.seperatorLabel == nil)
-        {
-            self.seperatorLabel = [UILabel new];
-            self.seperatorLabel.font = perfectFont;
-            self.seperatorLabel.textAlignment = NSTextAlignmentCenter;
-            self.seperatorLabel.text = @"~";
-            [self addSubview:self.seperatorLabel];
-            
-            [NSLayoutConstraint addEqualToConstraints:self.seperatorLabel superView:self attributes:@[@(NSLayoutAttributeTop),@(NSLayoutAttributeBottom)]];
-            
-            [otherActiveConstraints addObject:[self.seperatorLabel.rightAnchor  constraintEqualToAnchor:self.endDateLabel.leftAnchor constant:-10]];
-        }
+        self.endTimeField.hour = 23;
+        self.endTimeField.minute = 59;
+        self.endTimeField.second = 59;
+        
+        UILabel* seperatorLabel = [UILabel new];
+        seperatorLabel.text = @"~";
+        seperatorLabel.font = perfectFont;
+        [self addSubview:seperatorLabel];
+        
+        [NSLayoutConstraint addEqualToConstraints:seperatorLabel superView:self attributes:@[@(NSLayoutAttributeCenterY),@(NSLayoutAttributeCenterX)]];
+        
         
         if (self.startTimeField == nil)
         {
-            self.startTimeField = [UITextField new];
-            self.startTimeField.font = perfectFont;
-            self.startTimeField.delegate = self;
+            self.startTimeField = [SKTimePicker new];
+            self.startTimeField.timer_delegate = self;
+            self.startTimeField.lastComponent = [self lastTimeComponent];
+            self.startTimeField.timeFormateString = [self timeFormatString];
+            self.startTimeField.plainField.font = perfectFont;
+            self.startTimeField.plainField.textAlignment = NSTextAlignmentRight;
+//            self.startTimeField.delegate = self;
             [self addSubview:self.startTimeField];
-            [NSLayoutConstraint addEqualToConstraints:self.startTimeField superView:self attributes:@[@(NSLayoutAttributeTop),@(NSLayoutAttributeBottom)]];
+            [NSLayoutConstraint addEqualToConstraints:self.startTimeField superView:self attributes:@[@(NSLayoutAttributeLeft),@(NSLayoutAttributeTop),@(NSLayoutAttributeBottom),@(NSLayoutAttributeHeight)]];
             
-            [otherActiveConstraints addObject:[self.startTimeField.rightAnchor  constraintEqualToAnchor:self.seperatorLabel.leftAnchor constant:-10]];
+           // [otherActiveConstraints addObject:[self.startTimeField.rightAnchor  constraintEqualToAnchor:self.seperatorLabel.leftAnchor constant:-10]];
+            
+            [otherActiveConstraints addObject:[self.startTimeField.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:timeRatio]];
         }
         
-        if (self.startDateLabel == nil)
-        {
-            self.startDateLabel = [UILabel new];
-            self.startDateLabel.textAlignment = NSTextAlignmentRight;
-            self.startDateLabel.font = perfectFont;
-            [self addSubview:self.startDateLabel];
-            
-            [NSLayoutConstraint addEqualToConstraints:self.startDateLabel superView:self attributes:@[@(NSLayoutAttributeTop),@(NSLayoutAttributeBottom)]];
-            
-            [otherActiveConstraints addObject:[self.startTimeField.leftAnchor constraintEqualToAnchor:self.startDateLabel.rightAnchor constant:10]];
-        }
-        
-        [self.endTimeField setPlaceholder:[self getEndTimeText]];
-        [self.startTimeField setPlaceholder:[self getTimeText]];
+        [self.startTimeField updateTimePlainText];
+        [self.endTimeField updateTimePlainText];
     }
     else
-        [self.timeField setPlaceholder:[self getTimeText]];
+    {
+        self.timeField.plainField.textAlignment = NSTextAlignmentRight;
+        [self.timeField updateTimePlainText];
+    }
 }
-
-//-(void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//    
-//    [self.timeField sizeToFit];
-//    [self.dateLabel sizeToFit];
-//    
-//    CGRect heightFrame = self.timeField.frame;
-//    heightFrame.size.height = self.bounds.size.height;
-//    self.timeField.frame = heightFrame;
-//    
-//    heightFrame = self.dateLabel.frame;
-//    heightFrame.size.height = self.bounds.size.height;
-//    self.dateLabel.frame = heightFrame;
-//}
 
 -(BOOL)endEditing:(BOOL)force
 {
@@ -159,9 +126,11 @@
 -(void)notifySelectedDateChanged:(NSDate*)date
 {
     [self.datetimeFormatter setDateFormat:[self dateFormatString]];
-    [self.dateLabel setText:[self.datetimeFormatter stringFromDate:date]];
+//    [self.dateLabel setText:[self.datetimeFormatter stringFromDate:date]];
     
-    self.dateAndTime = [date updateHour:self.hour minute:self.minute second:self.second];
+    self.dateAndTime = [date updateHour:self.timeField.hour minute:self.timeField.minute second:self.timeField.second];
+    self.timeField.date = self.dateAndTime;
+    [self.timeField updateTimePlainText];
 }
 
 -(void)notifySelectedPeriodChanged:(NSDate*)startDate to:(NSDate*)endDate
@@ -169,33 +138,27 @@
     [self.datetimeFormatter setDateFormat:[self dateFormatString]];
     if (startDate)
     {
-        [self.startDateLabel setText:[self.datetimeFormatter stringFromDate:startDate]];
-        self.dateAndTime = [startDate updateHour:self.hour minute:self.minute second:self.second];
+//        [self.startDateLabel setText:[self.datetimeFormatter stringFromDate:startDate]];
+        self.dateAndTime = [startDate updateHour:self.startTimeField.hour minute:self.startTimeField.minute second:self.startTimeField.second];
+        self.startTimeField.date = self.dateAndTime;
     }
     else
     {
-        self.startDateLabel.text = @"";
+        self.startTimeField.date = nil;
     }
+    [self.startTimeField updateTimePlainText];
     
     if (endDate)
     {
-        [self.endDateLabel setText:[self.datetimeFormatter stringFromDate:endDate]];
-        self.endDateAndTime = [endDate updateHour:self.endHour minute:self.endMinute second:self.endSecond];
+//        [self.endDateLabel setText:[self.datetimeFormatter stringFromDate:endDate]];
+        self.endDateAndTime = [endDate updateHour:self.endTimeField.hour minute:self.endTimeField.minute second:self.endTimeField.second];
+        self.endTimeField.date = self.endDateAndTime;
     }
     else
     {
-        self.endDateLabel.text = @"";
+        self.endTimeField.date = nil;
     }
-}
-
--(NSString*)getTimeText
-{
-    return [self getTimeTextHour:self.hour min:self.minute second:self.second];
-}
-
--(NSString*)getEndTimeText
-{
-    return [self getTimeTextHour:self.endHour min:self.endMinute second:self.endSecond];
+    [self.endTimeField updateTimePlainText];
 }
 
 -(NSString*)dateFormatString
@@ -205,47 +168,64 @@
 
 -(NSString*)timeFormatString
 {
+    TimeFiledFormat timeformat = [self.datePickerView timeFiledFormat];
+    if(timeformat == TimeFormat_HM)
+        return @"HH:mm";
+    if(timeformat == TimeFormat_H)
+        return @"HH";
     return @"HH:mm:ss";
 }
 
-
-#pragma mark - UITextFieldDelegate methods
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+-(TimeComponents)lastTimeComponent
 {
-    if (string.length <= 1)
+    TimeFiledFormat timeformat = [self.datePickerView timeFiledFormat];
+    if(timeformat == TimeFormat_HM)
+        return TimeComponentSecond;
+    if(timeformat == TimeFormat_H)
+        return TimeComponentMinute;
+    return TimeComponentAll;
+}
+
+#pragma mark - timer delegate
+-(void)timeValueChanged:(SKTimePicker*)timePicker
+{
+    if (![self.datePickerView shouldContinueSelection])
     {
-        NSString* textNewString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-        if (string.length == 1)
-        {
-            //Only number or ':', acceptable
-            if([string characterAtIndex:0] >= '0' && [string characterAtIndex:0] <= '9') return [self validateTimeString:textNewString];
-            if([string characterAtIndex:0] == ':')
-            {
-                return [self validateTimeString:textNewString];
-            }
-            return NO;
-        }
-        //Delete or blank key, acceptable.
-        return [self validateTimeString:textNewString];
+        self.dateAndTime = [self.dateAndTime updateHour:timePicker.hour minute:timePicker.minute second:timePicker.second];
+        [self.datePickerView.delegate didSelectDay:self.dateAndTime];
     }
-    return NO;
+    else if ([self.datePickerView.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)])
+    {
+        if (timePicker == self.startTimeField)
+        {
+            self.dateAndTime = [self.dateAndTime updateHour:timePicker.hour minute:timePicker.minute second:timePicker.second];
+        }
+        else if (timePicker == self.endTimeField)
+        {
+            self.endDateAndTime = [self.endDateAndTime updateHour:timePicker.hour minute:timePicker.minute second:timePicker.second];
+        }
+        
+        [self.datePickerView.delegate didSelectContinueDayFrom:self.dateAndTime toEnd:self.endDateAndTime];
+    }
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField
+-(bool)validateTimeValue:(SKTimePicker *)timePicker
 {
-    [self validateAndUpdateTimeString:textField];
+    if (![self.datePickerView shouldContinueSelection]) return true;
+    NSDate* startDate = self.dateAndTime;
+    NSDate* endDate = self.endDateAndTime;
+    if (timePicker == self.startTimeField)
+    {
+        startDate = [self.dateAndTime updateHour:timePicker.hour minute:timePicker.minute second:timePicker.second];
+    }
+    else if (timePicker == self.endTimeField)
+    {
+        endDate = [self.endDateAndTime updateHour:timePicker.hour minute:timePicker.minute second:timePicker.second];
+    }
+    
+    return [[startDate earlierDate:endDate] isEqualToDate:startDate];
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [self validateAndUpdateTimeString:textField];
-    return YES;
-}
-
-//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-//{
-//    return NO;
-//}
 #pragma mark - logic methods
 -(BOOL)validateTimeString:(NSString*)timeString
 {
@@ -279,57 +259,57 @@
     }
     return NO;
 }
-
--(void)validateAndUpdateTimeString:(UITextField *)textField
-{
-    bool isSingleOrStartFiled = true;
-    if ([self.datePickerView shouldContinueSelection] && textField == self.endTimeField)
-    {
-        isSingleOrStartFiled = false;
-    }
-    NSUInteger hour,minute,second;
-    if (isSingleOrStartFiled)
-    {
-        hour = self.hour;
-        minute = self.minute;
-        second = self.second;
-        bool updateTimeValue = [self validateTimeString:textField hour:&hour minute:&minute second:&second];
-        if (updateTimeValue)
-        {
-            self.hour = hour;
-            self.minute = minute;
-            self.second = second;
-            [textField setText:[self getTimeText]];
-            self.dateAndTime = [self.dateAndTime updateHour:self.hour minute:self.minute second:self.second];
-            if (![self.datePickerView shouldContinueSelection]) {
-                [self.datePickerView.delegate didSelectDay:self.dateAndTime];
-            }
-            else if ([self.datePickerView.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)]) {
-                
-                [self.datePickerView.delegate didSelectContinueDayFrom:self.dateAndTime toEnd:self.endDateAndTime];
-            }
-        }
-    }
-    else
-    {
-        hour = self.endHour;
-        minute = self.endMinute;
-        second = self.endSecond;
-        bool updateTimeValue = [self validateTimeString:textField hour:&hour minute:&minute second:&second];
-        if (updateTimeValue)
-        {
-            self.endHour = hour;
-            self.endMinute = minute;
-            self.endSecond = second;
-            [textField setText:[self getEndTimeText]];
-            self.endDateAndTime = [self.endDateAndTime updateHour:self.endHour minute:self.endMinute second:self.endSecond];
-            if ([self.datePickerView.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)]) {
-                
-                [self.datePickerView.delegate didSelectContinueDayFrom:self.dateAndTime toEnd:self.endDateAndTime];
-            }
-        }
-    }
-}
+//
+//-(void)validateAndUpdateTimeString:(UITextField *)textField
+//{
+//    bool isSingleOrStartFiled = true;
+//    if ([self.datePickerView shouldContinueSelection] && textField == self.endTimeField)
+//    {
+//        isSingleOrStartFiled = false;
+//    }
+//    NSUInteger hour,minute,second;
+//    if (isSingleOrStartFiled)
+//    {
+//        hour = self.hour;
+//        minute = self.minute;
+//        second = self.second;
+//        bool updateTimeValue = [self validateTimeString:textField hour:&hour minute:&minute second:&second];
+//        if (updateTimeValue)
+//        {
+//            self.hour = hour;
+//            self.minute = minute;
+//            self.second = second;
+//            [textField setText:[self getTimeText]];
+//            self.dateAndTime = [self.dateAndTime updateHour:self.hour minute:self.minute second:self.second];
+//            if (![self.datePickerView shouldContinueSelection]) {
+//                [self.datePickerView.delegate didSelectDay:self.dateAndTime];
+//            }
+//            else if ([self.datePickerView.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)]) {
+//
+//                [self.datePickerView.delegate didSelectContinueDayFrom:self.dateAndTime toEnd:self.endDateAndTime];
+//            }
+//        }
+//    }
+//    else
+//    {
+//        hour = self.endHour;
+//        minute = self.endMinute;
+//        second = self.endSecond;
+//        bool updateTimeValue = [self validateTimeString:textField hour:&hour minute:&minute second:&second];
+//        if (updateTimeValue)
+//        {
+//            self.endHour = hour;
+//            self.endMinute = minute;
+//            self.endSecond = second;
+//            [textField setText:[self getEndTimeText]];
+//            self.endDateAndTime = [self.endDateAndTime updateHour:self.endHour minute:self.endMinute second:self.endSecond];
+//            if ([self.datePickerView.delegate respondsToSelector:@selector(didSelectContinueDayFrom:toEnd:)]) {
+//
+//                [self.datePickerView.delegate didSelectContinueDayFrom:self.dateAndTime toEnd:self.endDateAndTime];
+//            }
+//        }
+//    }
+//}
 
 -(BOOL)validateTimeString:(UITextField *)textField hour:(NSUInteger*)hour minute:(NSUInteger*)minute second:(NSUInteger*)second
 {
@@ -372,17 +352,6 @@
         }
     }
     
-
-    
     return updateTimeValue;
-}
-
--(NSString*)getTimeTextHour:(NSUInteger)hour min:(NSUInteger)minute second:(NSUInteger)second
-{
-    [self.datetimeFormatter setDateFormat:@"HH:mm:ss"];
-    NSDate *date = [self.datetimeFormatter dateFromString:[NSString stringWithFormat:@"%lu:%lu:%lu",hour,minute,second]];
-    
-    [self.datetimeFormatter setDateFormat:[self timeFormatString]];
-    return [self.datetimeFormatter stringFromDate:date];
 }
 @end

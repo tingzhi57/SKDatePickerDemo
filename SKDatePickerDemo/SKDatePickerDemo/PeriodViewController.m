@@ -93,10 +93,15 @@
 //    return YES;
 //}
 
--(BOOL)shouldShowTimeField
-{
-    return YES;
-}
+//-(BOOL)shouldShowTimeField
+//{
+//    return YES;
+//}
+
+//-(TimeFiledFormat)timeFiledFormat
+//{
+//    return TimeFormat_H;
+//}
 
 -(SelectionShape)selectionShape
 {

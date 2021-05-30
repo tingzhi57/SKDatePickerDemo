@@ -72,6 +72,12 @@
 {
     return YES;
 }
+
+-(TimeFiledFormat)timeFiledFormat
+{
+    return TimeFormat_HM;
+}
+
 //-(NSLocale*)preferredLocal
 //{
 ////    NSLog(@"%s,[%@]",__func__,[[NSLocale systemLocale] localeIdentifier]);

@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(UIColor*)colorForDayLabelInMonth;
 -(UIColor*)colorForUnavaibleDay;
+
+-(TimeFiledFormat)timeFiledFormat;
 @end
 
 NS_ASSUME_NONNULL_END

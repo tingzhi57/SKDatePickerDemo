@@ -111,50 +111,24 @@
     {
         totalHeightRatio += [self rowViewHeightRatio];
     }
+    float datetimeRatio = [self rowViewHeightRatio];
     if ([self shouldDatetimeField])
     {
-        totalHeightRatio += [self rowViewHeightRatio];
+        totalHeightRatio += datetimeRatio;
     }
     NSLayoutConstraint * w_constrain = [containerView.heightAnchor constraintEqualToAnchor:containerView.widthAnchor multiplier:totalHeightRatio];
     
-    w_constrain.priority = UILayoutPriorityDefaultHigh;
+//    w_constrain.priority = UILayoutPriorityDefaultHigh;
     [active_constrains addObject:w_constrain];
     
     
-    
-    if(self.datetimeField == nil)
-    {
-        self.datetimeField = [SKSelectedDatetimeField new];
-        [containerView addSubview:self.datetimeField];
-        [NSLayoutConstraint addEqualToConstraints:self.datetimeField superView:containerView attributes:@[@(NSLayoutAttributeLeft),@(NSLayoutAttributeRight),@(NSLayoutAttributeTop)]];
-    }
-    
-    if ([self shouldDatetimeField])
-    {
-        [active_constrains addObject:[self.datetimeField.heightAnchor constraintEqualToAnchor:containerView.heightAnchor multiplier:[self rowViewHeightRatio]]];
-        
-//        [active_constrains addObject:[self.datetimeField.topAnchor constraintEqualToAnchor:self.contentController.scrollView.bottomAnchor]];
-        
-        [self.datetimeField setupUI:self otherContraints:active_constrains];
-        self.datetimeField.hidden = NO;
-        [self.datetimeField notifySelectedDateChanged:self.dateToPresent];
-        if ([self shouldContinueSelection])
-        {
-            [self.datetimeField notifySelectedPeriodChanged:self.startDateToPresent to:self.endDateToPresent];
-        }
-    }
-    else
-    {
-        [active_constrains addObject:[self.datetimeField.heightAnchor constraintEqualToConstant:0]];
-        self.datetimeField.hidden = YES;
-    }
     
     if (self.topToolBar == nil)
     {
         self.topToolBar = [UIView new];
         [containerView addSubview:self.topToolBar];
-        [NSLayoutConstraint addEqualToConstraints:self.topToolBar superView:containerView attributes:@[@(NSLayoutAttributeLeft),@(NSLayoutAttributeRight)]];
-        [active_constrains addObject:[self.topToolBar.topAnchor constraintEqualToAnchor:self.datetimeField.bottomAnchor]];
+        [NSLayoutConstraint addEqualToConstraints:self.topToolBar superView:containerView attributes:@[@(NSLayoutAttributeLeft),@(NSLayoutAttributeRight),@(NSLayoutAttributeTop)]];
+       // [active_constrains addObject:[self.topToolBar.topAnchor constraintEqualToAnchor:self.datetimeField.bottomAnchor]];
     }
     
     if ([self shouldShowTopToolBar])
@@ -204,6 +178,37 @@
 //    [[self.contentController.scrollView.heightAnchor constraintLessThanOrEqualToAnchor:self.weekdaysView.heightAnchor multiplier:6.0f] setActive:YES];
     
     
+    
+    if(self.datetimeField == nil)
+    {
+        self.datetimeField = [SKSelectedDatetimeField new];
+        [containerView addSubview:self.datetimeField];
+        [NSLayoutConstraint addEqualToConstraints:self.datetimeField superView:containerView attributes:@[@(NSLayoutAttributeLeft),@(NSLayoutAttributeRight),@(NSLayoutAttributeBottom)]];
+    }
+    
+    [active_constrains addObject:[self.contentController.scrollView.bottomAnchor constraintEqualToAnchor:self.datetimeField.topAnchor]];
+    
+    if ([self shouldDatetimeField])
+    {
+        [active_constrains addObject:[self.datetimeField.heightAnchor constraintEqualToAnchor:containerView.heightAnchor multiplier:datetimeRatio]];
+        [active_constrains addObject:[self.datetimeField.widthAnchor constraintEqualToAnchor:containerView.widthAnchor]];
+        
+        [active_constrains addObject:[self.datetimeField.topAnchor constraintEqualToAnchor:self.contentController.scrollView.bottomAnchor]];
+        
+        [self.datetimeField setupUI:self otherContraints:active_constrains];
+        self.datetimeField.hidden = NO;
+        [self.datetimeField notifySelectedDateChanged:self.dateToPresent];
+        if ([self shouldContinueSelection])
+        {
+            [self.datetimeField notifySelectedPeriodChanged:self.startDateToPresent to:self.endDateToPresent];
+        }
+    }
+    else
+    {
+        [active_constrains addObject:[self.datetimeField.heightAnchor constraintEqualToConstant:0]];
+        self.datetimeField.hidden = YES;
+    }
+    
     [active_constrains addObject:[self.weekdaysView.heightAnchor constraintEqualToAnchor:containerView.heightAnchor multiplier:[self rowViewHeightRatio]]];
     
    // [active_constrains addObject:[self.weekdaysView.widthAnchor constraintEqualToAnchor:self.weekdaysView.heightAnchor multiplier:7.0f]];
@@ -219,7 +224,7 @@
     [active_constrains addObject:[self.weekdaysView.topAnchor constraintEqualToAnchor:self.topToolBar.bottomAnchor]];
     
     
-    [active_constrains addObject:[self.contentController.scrollView.bottomAnchor constraintLessThanOrEqualToAnchor:containerView.bottomAnchor]];
+//    [active_constrains addObject:[self.contentController.scrollView.bottomAnchor constraintLessThanOrEqualToAnchor:containerView.bottomAnchor]];
     [NSLayoutConstraint activateConstraints:active_constrains];
 }
 
@@ -484,6 +489,15 @@
         return [self.delegate shouldShowTimeField];
     }
     return NO;
+}
+
+-(TimeFiledFormat)timeFiledFormat
+{
+    if ([self.delegate respondsToSelector:@selector(timeFiledFormat)])
+    {
+        return [self.delegate timeFiledFormat];
+    }
+    return TimeFormat_HMS;
 }
 
 #pragma mark - Colors

@@ -17,6 +17,12 @@ typedef NS_ENUM(NSInteger, SelectionShape)
     SelectionShapeRoundedRect
 };
 
+typedef NS_ENUM(NSInteger, TimeFiledFormat)
+{
+    TimeFormat_HMS,
+    TimeFormat_HM,
+    TimeFormat_H
+};
 
 @class SKDatePickerDayView;
 @class SKDatePickerMonthView;
@@ -120,6 +126,14 @@ typedef NS_ENUM(NSInteger, SelectionShape)
  * - note:Implementing this method is optional. It's default is set to false.
  */
 -(BOOL)shouldShowTimeField;
+
+/**
+ * @brief Determines the time filed format.
+ * @return TimeFormat_HMS can pick hour&minute&second;
+ * TimeFormat_HM can pick hour&minute;
+ * TimeFormat_H can pick hour;
+ */
+-(TimeFiledFormat)timeFiledFormat;
 
 #pragma mark - General appearance properties
 ///color of any date label text that falls within the presented month
