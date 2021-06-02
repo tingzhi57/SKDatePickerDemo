@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "SKDatePicker"
-  spec.version      = "1.2.0"
+  spec.version      = "1.3.0"
   spec.summary      = "SKDatePicker is an Objective-C version of JBDatePicker(https://cocoapods.org/pods/JBDatePicker)"
 
   # This description is used to generate tags and improve search results.
@@ -125,7 +125,7 @@ THE SOFTWARE.
   #
 
   # spec.resource  = "icon.png"
-  # spec.resources = "Resources/*.png"
+  spec.resources = "SKDatePickerDemo/SKDatePicker/skdatepicker/images/*.png"
 
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 

@@ -41,6 +41,7 @@
         self.timeField.timer_delegate = self;
         self.timeField.lastComponent = [self lastTimeComponent];
         self.timeField.timeFormateString = [self timeFormatString];
+        self.timeField.plainField.font = perfectFont;
         [self addSubview:self.timeField];
         [NSLayoutConstraint addEqualToConstraints:self.timeField superView:self attributes:@[@(NSLayoutAttributeRight),@(NSLayoutAttributeTop),@(NSLayoutAttributeBottom),@(NSLayoutAttributeHeight)]];
     }
