@@ -49,6 +49,12 @@
     NSLog(@"component.month:%ld,component.day:%ld",component.month,component.day);
     NSLog(@"component.date:%@", [[NSCalendar currentCalendar] dateFromComponents:component]);
     
+    NSString* dateFormateString = @"yyyy-MMM-dd";
+    NSUInteger startLoc = [dateFormateString rangeOfString:@"M"].location;
+    NSUInteger endLoc = [dateFormateString rangeOfString:@"M" options:NSBackwardsSearch].location;
+    
+    
+    NSLog(@"startLoc:%ld,endLoc:%ld",startLoc,endLoc);
 }
 
 //- (void)testPerformanceExample {

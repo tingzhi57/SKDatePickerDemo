@@ -5,8 +5,7 @@
 //  Created by xiw on 2021/5/24.
 //
 
-#import "SKColumnPicker.h"
-#import "SKDatePickerViewDelegate.h"
+#import <skdatepicker/SKColumnPicker.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

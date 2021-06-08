@@ -22,3 +22,5 @@ FOUNDATION_EXPORT const unsigned char skdatepickerVersionString[];
 #import <skdatepicker/SKDatePickerView.h>
 #import <skdatepicker/SKDatePickerWeekLabelsView.h>
 #import <skdatepicker/SKDatePickerMonthView.h>
+#import <skdatepicker/SKTimePicker.h>
+#import <skdatepicker/SKSimpleDatePicker.h>

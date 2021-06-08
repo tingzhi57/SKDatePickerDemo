@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E31116A26479EA5001C448E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E31116C26479EA5001C448E /* Localizable.strings */; };
+		4E43DB3F266CC858008345B2 /* PickersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E43DB3D266CC858008345B2 /* PickersViewController.m */; };
 		4ECD224226442879000D19E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD224126442879000D19E3 /* AppDelegate.m */; };
 		4ECD224526442879000D19E3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD224426442879000D19E3 /* SceneDelegate.m */; };
 		4ECD224826442879000D19E3 /* SingleDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD224726442879000D19E3 /* SingleDateViewController.m */; };
@@ -56,6 +57,8 @@
 /* Begin PBXFileReference section */
 		4E31116B26479EA5001C448E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E31116D26479EAA001C448E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4E43DB3C266CC858008345B2 /* PickersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickersViewController.h; sourceTree = "<group>"; };
+		4E43DB3D266CC858008345B2 /* PickersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickersViewController.m; sourceTree = "<group>"; };
 		4E5DB3882646F82000CF610E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		4E5DB38B2646F82000CF610E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		4E5DB38D2646FA2A00CF610E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -151,6 +154,8 @@
 				4ECD228726442C6F000D19E3 /* PeriodViewController.h */,
 				4ECD228826442C6F000D19E3 /* PeriodViewController.m */,
 				4E31116C26479EA5001C448E /* Localizable.strings */,
+				4E43DB3C266CC858008345B2 /* PickersViewController.h */,
+				4E43DB3D266CC858008345B2 /* PickersViewController.m */,
 			);
 			path = SKDatePickerDemo;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 				4ECD224826442879000D19E3 /* SingleDateViewController.m in Sources */,
 				4ECD224226442879000D19E3 /* AppDelegate.m in Sources */,
 				4ECD224526442879000D19E3 /* SceneDelegate.m in Sources */,
+				4E43DB3F266CC858008345B2 /* PickersViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
