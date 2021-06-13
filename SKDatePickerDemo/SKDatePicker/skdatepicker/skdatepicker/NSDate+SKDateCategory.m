@@ -27,4 +27,15 @@
     
     return [calendar dateFromComponents:comps];
 }
+
+-(void)getHour:(nonnull NSUInteger*)hour minute:(nonnull NSUInteger*)minute second:(nonnull NSUInteger*)second
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents * comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:self];
+    
+    *hour = comps.hour;
+    *minute = comps.minute;
+    *second = comps.second;
+}
 @end

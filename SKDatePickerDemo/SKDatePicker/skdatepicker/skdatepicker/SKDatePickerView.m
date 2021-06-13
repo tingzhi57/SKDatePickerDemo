@@ -75,7 +75,8 @@
     {
         if ([self.delegate respondsToSelector:@selector(dateToShow)] && [self.delegate dateToShow])
         {
-            _dateToPresent = [[self.delegate dateToShow] stripped];
+            NSDate* date = [self shouldDatetimeField] ? [self.delegate dateToShow] : [[self.delegate dateToShow] stripped];
+            _dateToPresent = date;
         }
         else if(self.startDateToPresent)
         {
@@ -197,11 +198,11 @@
         
         [self.datetimeField setupUI:self otherContraints:active_constrains];
         self.datetimeField.hidden = NO;
-        [self.datetimeField notifySelectedDateChanged:self.dateToPresent];
+        
         if ([self shouldContinueSelection])
-        {
-            [self.datetimeField notifySelectedPeriodChanged:self.startDateToPresent to:self.endDateToPresent];
-        }
+            [self presentStartDate:self.startDateToPresent endDate:self.endDateToPresent];
+        else
+            [self presentDate:self.dateToPresent];
     }
     else
     {
@@ -233,12 +234,27 @@
     return self.manager.calendar;
 }
 
+-(void)presentDate:(nonnull NSDate*)date
+{
+    if (date != nil)
+    {
+        NSDate* stripDate = [self shouldDatetimeField] ? date : [date stripped];
+        if (_dateToPresent == nil)
+        {
+            _dateToPresent = stripDate;
+        }
+        
+        [self.datetimeField notifyDateChanged:self.dateToPresent];
+        [self.datetimeField notifyTimeChanged:self.dateToPresent];
+    }
+}
+
 -(void)presentStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
 {
     if (startDate != nil && endDate != nil)
     {
-        NSDate* stripSDate = [startDate stripped];
-        NSDate* stripEDate = [endDate stripped];
+        NSDate* stripSDate = [self shouldDatetimeField] ? startDate : [startDate stripped];
+        NSDate* stripEDate = [self shouldDatetimeField] ? endDate : [endDate stripped];
         self.startDateToPresent = [stripSDate earlierDate:stripEDate];
         self.endDateToPresent = [stripEDate laterDate:stripSDate];
         if (_dateToPresent == nil)
@@ -252,7 +268,9 @@
             [self.contentController reload:self.startDateToPresent];
             [self setNeedsLayout];
         }
-        [self.datetimeField notifySelectedPeriodChanged:self.startDateToPresent to:self.endDateToPresent];
+         
+        [self.datetimeField notifyPeriodDateChanged:self.startDateToPresent to:self.endDateToPresent];
+        [self.datetimeField notifyPeriodTimeChanged:self.startDateToPresent to:self.endDateToPresent];
     }
 }
 
@@ -290,7 +308,14 @@
         [_selectedDateView deselect];
         _selectedDateView = selectedDateView;
         [_selectedDateView select];
-        _dateToPresent = selectedDateView.date;
+        if ([self shouldDatetimeField])
+        {
+            NSUInteger hour,minute,second;
+            [_dateToPresent getHour:&hour minute:&minute second:&second];
+            _dateToPresent = [selectedDateView.date updateHour:hour minute:minute second:second];
+        }
+        else
+            _dateToPresent = selectedDateView.date;
     }
     else
     {
@@ -314,7 +339,7 @@
     {
         if ([self shouldDatetimeField])
         {
-            [self.datetimeField notifySelectedDateChanged:dayView.date];
+            [self.datetimeField notifyDateChanged:dayView.date];
             [self.delegate didSelectDay:self.datetimeField.dateAndTime];
         }
         else
@@ -345,7 +370,7 @@
     
     if ([self shouldDatetimeField])
     {
-        [self.datetimeField notifySelectedPeriodChanged:start to:end];
+        [self.datetimeField notifyPeriodDateChanged:start to:end];
         startDate = self.datetimeField.dateAndTime;
         endDate = self.datetimeField.endDateAndTime;
     }

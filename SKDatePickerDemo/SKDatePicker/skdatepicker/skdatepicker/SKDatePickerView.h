@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) SKDatePickerDayView* selectedDateView;
 @property (nonatomic, weak) SKDatePickerMonthView* presentedMonthView;
 
+-(void)presentDate:(nonnull NSDate*)date;
 -(void)presentStartDate:(nonnull NSDate*)startDate endDate:(nonnull NSDate*)endDate;
 
 -(BOOL)dateIsSelectable:(NSDate*)date;

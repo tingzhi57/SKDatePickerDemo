@@ -33,7 +33,7 @@
             timeField.timer_delegate = self;
             timeField.lastComponent = lastComponent--;
             timeField.plainField.textAlignment = NSTextAlignmentRight;
-
+            timeField.hour = 14;
             timeField.timeFormateString = timeformat;
             
             [lineView addSubview:timeField];

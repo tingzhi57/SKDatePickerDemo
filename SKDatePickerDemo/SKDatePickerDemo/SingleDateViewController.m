@@ -127,4 +127,16 @@
 {
     return [UIColor lightGrayColor];
 }
+
+-(NSDate *)dateToShow
+{
+    NSCalendar* calendar = self.datePickerView.calendar;
+    NSDateComponents* tmpComponent = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday  | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
+    tmpComponent.hour = 2;
+    tmpComponent.minute = 0;
+    tmpComponent.second = 0;
+    
+    NSDate* date = [calendar dateFromComponents:tmpComponent];
+    return date;
+}
 @end

@@ -34,9 +34,15 @@
     NSCalendar* calendar = self.datePickerView.calendar;
     NSDateComponents* tmpComponent = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday  | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
     tmpComponent.month += 1;
+    tmpComponent.hour = 2;
+    tmpComponent.minute = 0;
+    tmpComponent.second = 0;
     
     NSDate* nextMonthStartDate = [calendar dateFromComponents:tmpComponent];
     tmpComponent.day += 7;
+    tmpComponent.hour = 23;
+    tmpComponent.minute = 59;
+    tmpComponent.second = 59;
     NSDate* nextWeekEndDate = [calendar dateFromComponents:tmpComponent];
     [self.datePickerView presentStartDate:nextMonthStartDate endDate:nextWeekEndDate];
     
@@ -93,10 +99,10 @@
 //    return YES;
 //}
 
-//-(BOOL)shouldShowTimeField
-//{
-//    return YES;
-//}
+-(BOOL)shouldShowTimeField
+{
+    return YES;
+}
 
 //-(TimeFiledFormat)timeFiledFormat
 //{

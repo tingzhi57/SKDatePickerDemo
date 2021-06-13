@@ -17,8 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)setupUI:(SKDatePickerView*)datepickerView otherContraints:(NSMutableArray<NSLayoutConstraint *>*)otherActiveConstraints;
 
--(void)notifySelectedDateChanged:(NSDate*)date;
--(void)notifySelectedPeriodChanged:(NSDate*)startDate to:(NSDate*)endDate;
+-(void)notifyTimeChanged:(NSDate*)date;
+-(void)notifyPeriodTimeChanged:(NSDate*)date to:(NSDate*)endDate;
+-(void)notifyDateChanged:(NSDate*)date;
+-(void)notifyPeriodDateChanged:(NSDate*)startDate to:(NSDate*)endDate;
 @end
 
 NS_ASSUME_NONNULL_END

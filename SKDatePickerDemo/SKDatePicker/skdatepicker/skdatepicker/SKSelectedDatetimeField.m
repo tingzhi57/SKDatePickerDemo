@@ -19,7 +19,7 @@
 @property (nonatomic,retain) SKTimePicker* startTimeField;
 @property (nonatomic,retain) SKTimePicker* endTimeField;
 
-@property (nonatomic,strong) NSDateFormatter  * datetimeFormatter;
+//@property (nonatomic,strong) NSDateFormatter  * datetimeFormatter;
 
 @end
 
@@ -116,17 +116,52 @@
     return result;
 }
 
--(NSDateFormatter *)datetimeFormatter
+//-(NSDateFormatter *)datetimeFormatter
+//{
+//    if (_datetimeFormatter == nil) {
+//        _datetimeFormatter = [[NSDateFormatter alloc] init];
+//    }
+//    return _datetimeFormatter;
+//}
+
+-(void)notifyTimeChanged:(NSDate*)date
 {
-    if (_datetimeFormatter == nil) {
-        _datetimeFormatter = [[NSDateFormatter alloc] init];
-    }
-    return _datetimeFormatter;
+    NSUInteger hour,minute,second;
+    [date getHour:&hour minute:&minute second:&second];
+    self.timeField.hour = hour;
+    self.timeField.minute = minute;
+    self.timeField.second = second;
+    [self.timeField updateTimePlainText];
 }
 
--(void)notifySelectedDateChanged:(NSDate*)date
+-(void)notifyPeriodTimeChanged:(NSDate*)startDate to:(NSDate*)endDate
 {
-    [self.datetimeFormatter setDateFormat:[self dateFormatString]];
+    if (startDate)
+    {
+        NSUInteger hour,minute,second;
+        [startDate getHour:&hour minute:&minute second:&second];
+        self.startTimeField.hour = hour;
+        self.startTimeField.minute = minute;
+        self.startTimeField.second = second;
+        
+        [self.startTimeField updateTimePlainText];
+    }
+    
+    if (endDate)
+    {
+        NSUInteger hour,minute,second;
+        [endDate getHour:&hour minute:&minute second:&second];
+        self.endTimeField.hour = hour;
+        self.endTimeField.minute = minute;
+        self.endTimeField.second = second;
+        
+        [self.endTimeField updateTimePlainText];
+    }
+}
+
+-(void)notifyDateChanged:(NSDate*)date
+{
+//    [self.datetimeFormatter setDateFormat:[self dateFormatString]];
 //    [self.dateLabel setText:[self.datetimeFormatter stringFromDate:date]];
     
     self.dateAndTime = [date updateHour:self.timeField.hour minute:self.timeField.minute second:self.timeField.second];
@@ -134,12 +169,11 @@
     [self.timeField updateTimePlainText];
 }
 
--(void)notifySelectedPeriodChanged:(NSDate*)startDate to:(NSDate*)endDate
+-(void)notifyPeriodDateChanged:(NSDate*)startDate to:(NSDate*)endDate
 {
-    [self.datetimeFormatter setDateFormat:[self dateFormatString]];
+//    [self.datetimeFormatter setDateFormat:[self dateFormatString]];
     if (startDate)
     {
-//        [self.startDateLabel setText:[self.datetimeFormatter stringFromDate:startDate]];
         self.dateAndTime = [startDate updateHour:self.startTimeField.hour minute:self.startTimeField.minute second:self.startTimeField.second];
         self.startTimeField.date = self.dateAndTime;
     }
@@ -151,7 +185,6 @@
     
     if (endDate)
     {
-//        [self.endDateLabel setText:[self.datetimeFormatter stringFromDate:endDate]];
         self.endDateAndTime = [endDate updateHour:self.endTimeField.hour minute:self.endTimeField.minute second:self.endTimeField.second];
         self.endTimeField.date = self.endDateAndTime;
     }
