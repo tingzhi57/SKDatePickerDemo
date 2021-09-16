@@ -123,7 +123,7 @@
         {
             self.textLabel.textColor = [self.datePickerView.delegate colorForToday];
         }
-        else
+        else if ([self isToday])
             self.textLabel.textColor = nil;
     }
     else

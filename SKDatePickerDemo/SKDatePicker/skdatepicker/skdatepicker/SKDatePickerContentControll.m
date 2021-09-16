@@ -19,7 +19,31 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
     MonthViewIdentifierNext
 };
 
-@interface SKDatePickerContentControll ()<UIScrollViewDelegate>
+@protocol SKScrollViewDelegate <UIScrollViewDelegate>
+
+@optional
+-(void)layoutDidUpdateFrame:(CGRect)frame;
+
+@end
+
+@interface SKScrollView : UIScrollView
+
+@end
+
+@implementation SKScrollView
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    if ([self.delegate respondsToSelector:@selector(layoutDidUpdateFrame:)])
+    {
+        [((id<SKScrollViewDelegate>)self.delegate) layoutDidUpdateFrame:self.frame];
+    }
+}
+
+@end
+
+@interface SKDatePickerContentControll ()<SKScrollViewDelegate>
 
 @property (nonatomic, weak) SKDatePickerView* datePickerView;
 @property (nonatomic, strong) NSMutableDictionary<NSNumber*,SKDatePickerMonthView*>* monthViews;
@@ -36,7 +60,7 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
 {
     self = [self init];
     self.datePickerView = pickerView;
-    _scrollView = [[UIScrollView alloc] initWithFrame:frame];
+    _scrollView = [[SKScrollView alloc] initWithFrame:frame];
     
     //setup scrollView. Give it a contentsize of 3 times the width because it will hold 3 monthViews
     self.scrollView.contentSize = CGSizeMake(frame.size.width * 3, frame.size.height);
@@ -46,7 +70,6 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
     self.scrollView.scrollEnabled = YES;
     [self.scrollView setPagingEnabled:true];
     self.scrollView.delegate = self;
-    
     
     //create the current Monthview for the current date and fill it with weekviews.
     self.monthViews = [NSMutableDictionary dictionaryWithCapacity:3];
@@ -277,6 +300,11 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
     }
     
     self.scrollDirection = 0;
+}
+
+-(void)layoutDidUpdateFrame:(CGRect)frame
+{
+    [self updateScrollViewFrame:frame];
 }
 
 #pragma mark - Presenting of monthViews

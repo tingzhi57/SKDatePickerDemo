@@ -19,6 +19,10 @@
 		4E65EEFE265BF1D100A07CA9 /* SKColumnPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65EEFC265BF1D100A07CA9 /* SKColumnPicker.m */; };
 		4E65EF06265BFA0800A07CA9 /* SKTimePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65EF04265BFA0800A07CA9 /* SKTimePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E65EF07265BFA0800A07CA9 /* SKTimePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65EF05265BFA0800A07CA9 /* SKTimePicker.m */; };
+		4E768D8126EE070200A6D578 /* btn_cancel@2x.png in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E04F7ED265D4B5900A57FCB /* btn_cancel@2x.png */; };
+		4E768D8226EE070200A6D578 /* btn_cancel@3x.png in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E04F7EE265D4B5900A57FCB /* btn_cancel@3x.png */; };
+		4E768D8326EE070200A6D578 /* btn_confirm@2x.png in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E04F7EC265D4B5900A57FCB /* btn_confirm@2x.png */; };
+		4E768D8426EE070200A6D578 /* btn_confirm@3x.png in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E04F7EF265D4B5900A57FCB /* btn_confirm@3x.png */; };
 		4ECD2187263FFEBD000D19E3 /* skdatepicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECD217D263FFEBD000D19E3 /* skdatepicker.framework */; };
 		4ECD218C263FFEBD000D19E3 /* skdatepickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECD218B263FFEBD000D19E3 /* skdatepickerTests.m */; };
 		4ECD218E263FFEBD000D19E3 /* skdatepicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECD2180263FFEBD000D19E3 /* skdatepicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -106,6 +110,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E768D8126EE070200A6D578 /* btn_cancel@2x.png in Frameworks */,
+				4E768D8226EE070200A6D578 /* btn_cancel@3x.png in Frameworks */,
+				4E768D8326EE070200A6D578 /* btn_confirm@2x.png in Frameworks */,
+				4E768D8426EE070200A6D578 /* btn_confirm@3x.png in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +128,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E768D8026EE070200A6D578 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4ECD2173263FFEBC000D19E3 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +142,7 @@
 				4ECD217F263FFEBD000D19E3 /* skdatepicker */,
 				4ECD218A263FFEBD000D19E3 /* skdatepickerTests */,
 				4ECD217E263FFEBD000D19E3 /* Products */,
+				4E768D8026EE070200A6D578 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -503,6 +519,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenksoft.www.skdatepicker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -530,6 +548,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenksoft.www.skdatepicker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

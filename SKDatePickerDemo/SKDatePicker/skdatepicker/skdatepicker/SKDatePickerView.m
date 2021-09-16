@@ -381,17 +381,7 @@
     }
 }
 
-#pragma mark - Layout
-/**
- Updates the layout of DatePicker. This makes sure that elements in DatePicker that need a frame, will get their frame.
- */
--(void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    [self.contentController updateScrollViewFrame:self.contentController.scrollView.frame];
-}
-
+#pragma mark - Public methods
 ///scrolls the next month into the visible area and creates an new 'next' month waiting in line.
 -(void)loadNextView
 {
