@@ -80,10 +80,14 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
 -(void)reload:(NSDate*)presentedDate
 {
     NSInteger newDateMonth = [self.datePickerView.calendar component:NSCalendarUnitMonth fromDate:presentedDate];
+    NSInteger newDateYear = [self.datePickerView.calendar component:NSCalendarUnitYear fromDate:presentedDate];
+    
     SKDatePickerMonthView* presentedMonthView = self.monthViews[@(MonthViewIdentifierPresented)];
     
     NSInteger firstDateMonth = [self.datePickerView.calendar component:NSCalendarUnitMonth fromDate:presentedMonthView.monthInfo.monthStartDay];
-    if (newDateMonth != firstDateMonth)
+    
+    NSInteger firstDateYear = [self.datePickerView.calendar component:NSCalendarUnitYear fromDate:presentedMonthView.monthInfo.monthStartDay];
+    if (newDateMonth != firstDateMonth || newDateYear != firstDateYear)
     {
         for (UIView* view in self.monthViews.allValues) {
             [view removeFromSuperview];
@@ -94,6 +98,7 @@ typedef NS_ENUM(NSInteger, MonthViewIdentifier)
     
     [self reSelectPeriodDays];
 }
+
 #pragma mark - Adding of MonthViews
 
 /**

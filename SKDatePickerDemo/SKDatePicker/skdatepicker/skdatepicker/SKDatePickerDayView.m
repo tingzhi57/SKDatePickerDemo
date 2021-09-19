@@ -227,6 +227,7 @@
 
 -(void)dayViewTapped
 {
+    [self.window.rootViewController.view endEditing:YES];
     [self.datePickerView didTapDayView:self];
 }
 @end

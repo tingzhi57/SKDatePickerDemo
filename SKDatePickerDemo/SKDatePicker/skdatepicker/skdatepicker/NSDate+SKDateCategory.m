@@ -38,4 +38,40 @@
     *minute = comps.minute;
     *second = comps.second;
 }
+
+-(NSDate*)nextYearDate
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents * comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:self];
+    comps.year ++;
+    return [calendar dateFromComponents:comps];
+}
+
+-(NSDate*)previousYearDate
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents * comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:self];
+    comps.year --;
+    return [calendar dateFromComponents:comps];
+}
+
+-(NSDate*)nextMonthDate
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents * comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:self];
+    comps.month ++;
+    return [calendar dateFromComponents:comps];
+}
+
+-(NSDate*)previousMonthDate
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents * comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:self];
+    comps.month --;
+    return [calendar dateFromComponents:comps];
+}
 @end

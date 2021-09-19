@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSDate*)stripped;
 -(NSDate*)updateHour:(NSUInteger)hour minute:(NSUInteger)minute second:(NSUInteger)second;
 -(void)getHour:(nonnull NSUInteger*)hour minute:(nonnull NSUInteger*)minute second:(nonnull NSUInteger*)second;
+-(NSDate*)nextYearDate;
+-(NSDate*)previousYearDate;
+-(NSDate*)nextMonthDate;
+-(NSDate*)previousMonthDate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) SKDatePickerWeekLabelsView* weekdaysView;
 @property (nonatomic, strong) SKDatePickerContentControll* contentController;
+@property (nonatomic,strong) UIButton* nextYearButton;
+@property (nonatomic,strong) UIButton* previousYearButton;
 @property (nonatomic,strong) UIButton* nextMonthButton;
 @property (nonatomic,strong) UIButton* previousMonthButton;
 @property (nonatomic,strong) UILabel* dateLabel;
@@ -277,7 +279,9 @@
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-    if ([self shouldDatetimeField]) {
+    [self.superview endEditing:YES];
+    if ([self shouldDatetimeField])
+    {
         [self.datetimeField endEditing:YES];
     }
 }
@@ -331,6 +335,26 @@
     }
 }
 
+-(void)didTapReloadDateButton:(UIButton*)button
+{
+    [self.superview endEditing:YES];
+    if (self.nextMonthButton == button)
+    {
+        [self loadNextMonth];
+    }
+    else if (self.previousMonthButton == button)
+    {
+        [self loadPreviousMonth];
+    }
+    else if (self.nextYearButton == button)
+    {
+        [self loadNextYear];
+    }
+    else if (self.previousYearButton == button)
+    {
+        [self loadPreviousYear];
+    }
+}
 
 -(void)didTapDayView:(SKDatePickerDayView *)dayView
 {
@@ -383,15 +407,33 @@
 
 #pragma mark - Public methods
 ///scrolls the next month into the visible area and creates an new 'next' month waiting in line.
--(void)loadNextView
+-(void)loadNextMonth
 {
+    NSDate* nextMonthDate = [self.dateToPresent nextMonthDate];
     [self.contentController presentNextView];
+    _dateToPresent = nextMonthDate;
 }
 
 ///scrolls the previous month into the visible area and creates an new 'previous' month waiting in line.
--(void)loadPreviousView
+-(void)loadPreviousMonth
 {
+    NSDate* previousMonthDate = [self.dateToPresent previousMonthDate];
     [self.contentController presentPreviousView];
+    _dateToPresent = previousMonthDate;
+}
+
+-(void)loadNextYear
+{
+    NSDate* nextYearDate = [self.dateToPresent nextYearDate];
+    [self.contentController reload:nextYearDate];
+    _dateToPresent = nextYearDate;
+}
+
+-(void)loadPreviousYear
+{
+    NSDate* previousYearDate = [self.dateToPresent previousYearDate];
+    [self.contentController reload:previousYearDate];
+    _dateToPresent = previousYearDate;
 }
 
 -(BOOL)shouldContinueSelection
@@ -449,24 +491,44 @@
     self.previousMonthButton = [UIButton new];
     [self.previousMonthButton setTitle:@" < " forState:UIControlStateNormal];
     
-    
-    [self.previousMonthButton addTarget:self action:@selector(loadPreviousView) forControlEvents:UIControlEventTouchUpInside];
+    [self.previousMonthButton addTarget:self action:@selector(didTapReloadDateButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.topToolBar addSubview:self.previousMonthButton];
-    
-    [NSLayoutConstraint addEqualToConstraints:self.previousMonthButton superView:self.topToolBar attributes:@[@(NSLayoutAttributeBottom),@(NSLayoutAttributeLeft),@(NSLayoutAttributeTop)]];
+    [NSLayoutConstraint addEqualToConstraints:self.previousMonthButton superView:self.topToolBar attributes:@[@(NSLayoutAttributeBottom),@(NSLayoutAttributeTop)]];
 
     [otherActiveConstraints addObject:[self.previousMonthButton.widthAnchor constraintEqualToAnchor:self.previousMonthButton.heightAnchor]];
+    
+    self.previousYearButton = [UIButton new];
+    [self.previousYearButton setTitle:@"<<" forState:UIControlStateNormal];
+    [self.previousYearButton addTarget:self action:@selector(didTapReloadDateButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.topToolBar addSubview:self.previousYearButton];
+    [NSLayoutConstraint addEqualToConstraints:self.previousYearButton superView:self.topToolBar attributes:@[@(NSLayoutAttributeBottom),@(NSLayoutAttributeLeft),@(NSLayoutAttributeTop)]];
+
+    [otherActiveConstraints addObject:[self.previousYearButton.widthAnchor constraintEqualToAnchor:self.previousYearButton.heightAnchor]];
+    
+    [otherActiveConstraints addObject:[self.previousYearButton.rightAnchor constraintEqualToAnchor:self.previousMonthButton.leftAnchor]];
 
     // Setup nextMonthButton
     self.nextMonthButton = [UIButton new];
     [self.nextMonthButton setTitle:@" > " forState:UIControlStateNormal];
     
-    [self.nextMonthButton addTarget:self action:@selector(loadNextView) forControlEvents:UIControlEventTouchUpInside];
+    [self.nextMonthButton addTarget:self action:@selector(didTapReloadDateButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.topToolBar addSubview:self.nextMonthButton];
 
-    [NSLayoutConstraint addEqualToConstraints:self.nextMonthButton superView:self.topToolBar attributes:@[@(NSLayoutAttributeBottom),@(NSLayoutAttributeRight),@(NSLayoutAttributeTop)]];
+    [NSLayoutConstraint addEqualToConstraints:self.nextMonthButton superView:self.topToolBar attributes:@[@(NSLayoutAttributeBottom),@(NSLayoutAttributeTop)]];
 
     [otherActiveConstraints addObject:[self.nextMonthButton.widthAnchor constraintEqualToAnchor:self.nextMonthButton.heightAnchor]];
+    
+    // Setup nextYearButton
+    self.nextYearButton = [UIButton new];
+    [self.nextYearButton setTitle:@">>" forState:UIControlStateNormal];
+    [self.nextYearButton addTarget:self action:@selector(didTapReloadDateButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.topToolBar addSubview:self.nextYearButton];
+
+    [NSLayoutConstraint addEqualToConstraints:self.nextYearButton superView:self.topToolBar attributes:@[@(NSLayoutAttributeBottom),@(NSLayoutAttributeRight),@(NSLayoutAttributeTop)]];
+    [otherActiveConstraints addObject:[self.nextYearButton.widthAnchor constraintEqualToAnchor:self.nextYearButton.heightAnchor]];
+
+    [otherActiveConstraints addObject:[self.nextYearButton.leftAnchor constraintEqualToAnchor:self.nextMonthButton.rightAnchor]];
+    
     if ([self.delegate respondsToSelector:@selector(colorForTopbarBackground)])
     {
         self.topToolBar.backgroundColor = [self.delegate colorForTopbarBackground];

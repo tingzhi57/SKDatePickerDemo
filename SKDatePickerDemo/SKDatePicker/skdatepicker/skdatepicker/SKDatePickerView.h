@@ -31,8 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)didSelectContinueDayFrom:(NSDate*)start to:(NSDate*)end;
 
 -(NSInteger)firstWeekDay;
--(void)loadNextView;
--(void)loadPreviousView;
+-(void)loadNextMonth;
+-(void)loadPreviousMonth;
 
 -(BOOL)shouldShowMonthOutDates;
 
