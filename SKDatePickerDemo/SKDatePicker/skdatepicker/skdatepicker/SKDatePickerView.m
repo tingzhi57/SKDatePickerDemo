@@ -556,6 +556,8 @@
     
     [self.previousMonthButton setTitleColor:self.dateLabel.textColor forState:UIControlStateNormal];
     [self.nextMonthButton setTitleColor:self.dateLabel.textColor forState:UIControlStateNormal];
+    [self.previousYearButton setTitleColor:self.dateLabel.textColor forState:UIControlStateNormal];
+    [self.nextYearButton setTitleColor:self.dateLabel.textColor forState:UIControlStateNormal];
 }
 
 #pragma mark - Datetime field
